@@ -89,3 +89,8 @@ proxy.ts                redirects `/` to the visitor's language
 4. Deploy. The language redirect, `/sitemap.xml`, `/robots.txt` and `/<lang>/opengraph-image`
    work out of the box.
 5. Custom domain (optional): add it under **Domains**, then set `NEXT_PUBLIC_SITE_URL` and redeploy.
+
+## License
+
+(c) 2026 Askar Turanazarov, all rights reserved. The code, design and materials are published
+for viewing only; see [LICENSE](./LICENSE).
