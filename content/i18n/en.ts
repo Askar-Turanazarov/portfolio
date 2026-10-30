@@ -1,0 +1,195 @@
+import type { Status, Tag } from "@/lib/schema";
+
+const en = {
+  meta: {
+    title: "Askar Turanazarov — Full-stack & AI developer",
+    description:
+      "I build AI-powered products end-to-end: web, Telegram, admin panels and payments, in English, Russian and Uzbek. Case studies, live demos and the stack behind each one.",
+  },
+  nav: {
+    projects: "Projects",
+    capabilities: "What I build",
+    stack: "Stack",
+    process: "How I work",
+    journey: "Journey",
+    contact: "Contact",
+    github: "GitHub",
+  },
+  hero: {
+    eyebrow: "Full-stack & AI developer · Tashkent",
+    title: "I build AI-powered products end-to-end.",
+    subtitle:
+      "Web app, Telegram bot, admin panel, payments and an AI assistant that falls back gracefully — delivered as one working product, in English, Russian and Uzbek.",
+    ctaProjects: "See the projects",
+    ctaGithub: "GitHub",
+    ctaContact: "Get in touch",
+    stats: {
+      projects: "projects shipped",
+      liveDemos: "live demos",
+      languages: "interface languages",
+      months: "months, from first line to 3D sales platform",
+    },
+  },
+  featured: {
+    eyebrow: "Selected work",
+    title: "Six products, each built as if it were going live.",
+    lead: "Auth, roles, payments emulation, tests, evals, deploy and a README in three languages. The companies are fictional. The engineering is not.",
+    problem: "Problem",
+    solution: "What I built",
+    highlights: "Hard parts",
+    forBusiness: "Applies to",
+    live: "Open live demo",
+    code: "Code",
+    caseStudy: "Read the case study",
+  },
+  capabilities: {
+    eyebrow: "What I can build for you",
+    title: "Business tasks, not technology names.",
+    lead: "Each capability below has already been built at least once. Follow the links to see it working.",
+    builtIn: "Built in",
+    items: [
+      {
+        title: "AI assistant for a website and Telegram",
+        desc: "Answers from your knowledge base, qualifies leads, books appointments. Falls back across Gemini, Claude and OpenAI so visitors never see an error.",
+        projects: ["domus-estate", "octane-forge", "orbit-landing"],
+      },
+      {
+        title: "RAG over your documents",
+        desc: "Hybrid vector + keyword retrieval, citations, a similarity threshold that refuses to invent facts, and an evaluation set to prove it.",
+        projects: ["skydental-rag", "domus-estate"],
+      },
+      {
+        title: "Telegram bot and Mini App",
+        desc: "Booking flows, notifications with action buttons, Mini Apps that reuse the web UI, Bot API invoices in UZS.",
+        projects: ["octane-forge", "corecraft-pc", "domus-estate"],
+      },
+      {
+        title: "Booking and payments for Uzbekistan",
+        desc: "Holds, bookings with deadlines, UzCard / HUMO and Click flows, Stripe test mode, subscriptions with trial and grace period.",
+        projects: ["domus-estate", "ustoz-ai", "octane-forge"],
+      },
+      {
+        title: "Admin panel and live dashboard",
+        desc: "Roles, filters, status workflows, Excel and PDF export, KPIs and an AI analyst that answers questions about your data.",
+        projects: ["marginflow-crm", "octane-forge", "domus-estate"],
+      },
+      {
+        title: "3D in the browser",
+        desc: "Product configurators, building showcases and first-person walks with Three.js, tuned to run on weak devices too.",
+        projects: ["domus-estate", "domus-furniture-3d", "corecraft-pc"],
+      },
+      {
+        title: "Multilingual site or CMS",
+        desc: "EN / RU / UZ from day one, block editors, templates, static export your client can host anywhere.",
+        projects: ["sitego", "marginflow-crm"],
+      },
+      {
+        title: "MCP server for Claude Desktop",
+        desc: "Let a manager ask Claude about bookings, attendance or stock — safely, through the same rules as the app.",
+        projects: ["domus-estate", "marginflow-crm", "domus-furniture-3d"],
+      },
+    ],
+  },
+  grid: {
+    eyebrow: "All projects",
+    title: "Everything else, filterable.",
+    lead: "Newest first. Early experiments live in the journey below.",
+    all: "All",
+    empty: "Nothing matches this filter yet.",
+    showing: "Showing",
+    of: "of",
+    live: "Live",
+    code: "Code",
+  },
+  stack: {
+    eyebrow: "Stack & why",
+    title: "The same tools, chosen on purpose.",
+    lead: "A stable toolkit means every new project starts at the architecture, not at the boilerplate.",
+    columns: { layer: "Layer", tech: "Technology", why: "Why" },
+    rows: [
+      { layer: "Framework", tech: "Next.js (App Router) · React 19 · TypeScript", why: "One language for front and back, server components, static generation and a straight path to Vercel." },
+      { layer: "Styling", tech: "Tailwind CSS v4 · shadcn/ui · HeroUI", why: "Design tokens as CSS variables, fast iteration, light and dark themes without flashes." },
+      { layer: "Data", tech: "PostgreSQL · Prisma · Neon · PGlite", why: "Type-safe queries; serverless Postgres in production and an embedded database locally, so nobody needs Docker to run a demo." },
+      { layer: "AI", tech: "Gemini · Claude · OpenAI · pgvector", why: "Light models by default for speed and cost, a fallback chain by error class, and RAG with a threshold instead of blind trust." },
+      { layer: "Telegram", tech: "grammY · Bot API payments · Mini Apps", why: "In Uzbekistan Telegram is where customers already are; the bot reuses the same core as the website." },
+      { layer: "3D", tech: "Three.js · React Three Fiber", why: "Procedural models and quality tiers chosen from the device, so scenes run on phones." },
+      { layer: "Validation & tests", tech: "Zod · Vitest · eval sets", why: "Schemas at every boundary; evals for anything an LLM touches." },
+      { layer: "Deploy", tech: "Vercel · Neon · Upstash · GitHub Actions", why: "Free tiers that behave like production: previews on every push, cron, blob storage, edge config." },
+    ],
+  },
+  process: {
+    eyebrow: "How I work",
+    title: "AI accelerates the typing. The decisions stay mine.",
+    lead: "I design the architecture, set the rules and verify the result. AI assistants such as Claude Code make the implementation fast; tests, evals and reviews keep it honest.",
+    steps: [
+      { title: "Specification", desc: "Who uses it, what breaks if it is wrong, what “done” means. Written down before any code." },
+      { title: "Architecture", desc: "One core with explicit rules; every entry point — web, bot, agent, MCP — goes through it." },
+      { title: "Implementation", desc: "Small, reviewed steps with AI pair-programming. Conventional commits, readable history." },
+      { title: "Verification", desc: "Unit tests, eval sets for AI behaviour, rate limits and validation at every boundary." },
+      { title: "Delivery", desc: "Deployed, documented in three languages, with demo data so anyone can try it without keys." },
+    ],
+  },
+  journey: {
+    eyebrow: "Journey",
+    title: "Four months, from a clicker to a 3D sales platform.",
+    lead: "Every project added one new capability. Here is the order they came in.",
+  },
+  about: {
+    eyebrow: "About",
+    title: "Askar Turanazarov",
+    paragraphs: [
+      "I am a full-stack developer from Tashkent. In 2026 I went through an intensive AI-first development course and shipped twenty projects in four months — each one a complete product with a backend, a database, a deployment and documentation.",
+      "I care about systems that stay correct from every entry point, about honest numbers, and about interfaces that work in three languages for the people who will actually use them.",
+      "Outside of code: aviation, space and nature.",
+    ],
+    note: "All projects are concept products for fictional companies. Payments run in test mode and data is synthetic. The architecture, the code and the deployments are real.",
+  },
+  contact: {
+    eyebrow: "Contact",
+    title: "Let’s build something.",
+    lead: "Open to full-time roles, contract work and partnerships. The fastest way to reach me is e-mail.",
+    email: "E-mail",
+    github: "GitHub",
+    telegram: "Telegram",
+    linkedin: "LinkedIn",
+    cv: "Download CV",
+  },
+  footer: {
+    built: "Built with Next.js, TypeScript and Tailwind CSS. Source on GitHub.",
+    rights: "All rights reserved.",
+  },
+  common: {
+    themeToggle: "Toggle theme",
+    openInNewTab: "opens in a new tab",
+    status: {
+      live: "Live",
+      "live-cold": "Live · cold start",
+      code: "Code only",
+      archived: "Archived",
+    } satisfies Record<Status, string>,
+    tags: {
+      ai: "AI",
+      rag: "RAG",
+      telegram: "Telegram",
+      "3d": "3D",
+      payments: "Payments",
+      admin: "Admin",
+      mcp: "MCP",
+      cms: "CMS",
+      ecommerce: "E-commerce",
+      saas: "SaaS",
+      fintech: "Fintech",
+      maps: "Maps",
+      fun: "Fun",
+    } satisfies Record<Tag, string>,
+    months: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+  },
+  notFound: {
+    title: "Page not found",
+    lead: "This route does not exist. The projects do, though.",
+    back: "Back to the projects",
+  },
+};
+
+export default en;
+export type Dictionary = typeof en;
