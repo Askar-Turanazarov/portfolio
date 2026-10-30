@@ -125,8 +125,13 @@ body {
   }
 }
 
-/* Subtle dotted background for the hero. */
-.dot-grid {
+/* Subtle dotted background for the hero. Lives in a pseudo-element so the
+   fade mask never touches the section's content. */
+.dot-grid::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
   background-image: radial-gradient(var(--border-strong) 1px, transparent 1px);
   background-size: 22px 22px;
   mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);

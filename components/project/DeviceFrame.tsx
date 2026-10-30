@@ -11,10 +11,10 @@ export function DeviceFrame({ url, children, className }: { url?: string; childr
           <span className="size-2.5 rounded-full bg-border-strong" />
           <span className="size-2.5 rounded-full bg-border-strong" />
         </span>
-        <span className="mx-auto flex h-6 w-full max-w-[60%] items-center justify-center truncate rounded-md bg-bg px-3 font-mono text-[11px] text-fg-subtle">
-          {url ?? "localhost"}
+        <span className="mx-auto flex h-6 w-full min-w-0 max-w-[60%] items-center justify-center rounded-md bg-bg px-3 font-mono text-[11px] text-fg-subtle">
+          <span className="truncate">{url ?? "localhost"}</span>
         </span>
-        <span className="w-[42px]" aria-hidden />
+        <span className="w-[42px] shrink-0" aria-hidden />
       </div>
       <div className="relative aspect-[16/10] bg-bg-muted">{children}</div>
     </div>

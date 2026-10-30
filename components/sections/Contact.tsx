@@ -32,7 +32,7 @@ export function Contact({ dict }: { dict: Dictionary }) {
               >
                 <span className="grid size-11 shrink-0 place-items-center rounded-md bg-accent-soft text-fg">{item.icon}</span>
                 <span className="min-w-0">
-                  <span className="block font-mono text-[11px] uppercase tracking-[0.18em] text-fg-subtle">{item.label}</span>
+                  <span className="block truncate font-mono text-[11px] uppercase tracking-[0.18em] text-fg-subtle">{item.label}</span>
                   <span className="block truncate text-sm font-medium text-fg group-hover:text-accent">{item.value}</span>
                 </span>
               </a>

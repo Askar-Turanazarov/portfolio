@@ -30,7 +30,7 @@ export function FeaturedCase({
 
   return (
     <Reveal as="article" className="grid items-center gap-8 lg:grid-cols-12 lg:gap-12">
-      <div className={cn("lg:col-span-7", flip && "lg:order-last")}>
+      <div className={cn("min-w-0 lg:col-span-7", flip && "lg:order-last")}>
         <a href={project.links.live ?? project.links.repo} target="_blank" rel="noopener noreferrer" className="block">
           <DeviceFrame url={project.links.live ? hostOf(project.links.live) : `github.com/…/${project.repo}`}>
             <Cover project={project} hasCover={hasCover} sizes="(min-width: 1024px) 58vw, 100vw" priority={index === 0} />
@@ -38,7 +38,7 @@ export function FeaturedCase({
         </a>
       </div>
 
-      <div className="lg:col-span-5">
+      <div className="min-w-0 lg:col-span-5">
         <div className="flex flex-wrap items-center gap-2">
           <span className="font-mono text-xs text-fg-subtle">{String(index + 1).padStart(2, "0")}</span>
           <StatusBadge status={project.status} labels={dict.common.status} />
