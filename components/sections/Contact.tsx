@@ -10,17 +10,17 @@ type Item = { label: string; value: string; href: string; icon: ReactNode };
 
 export function Contact({ dict }: { dict: Dictionary }) {
   const c = dict.contact;
-  const items: Item[] = [
-    { label: c.email, value: site.email, href: `mailto:${site.email}`, icon: <Mail className="size-5" aria-hidden /> },
-    { label: c.github, value: site.githubHandle, href: site.github, icon: <GitHubIcon className="size-5" /> },
-  ];
+  // Every contact is optional and configured through the environment (see .env.example).
+  const items: Item[] = [];
+  if (site.email) items.push({ label: c.email, value: site.email, href: `mailto:${site.email}`, icon: <Mail className="size-5" aria-hidden /> });
+  items.push({ label: c.github, value: site.githubHandle, href: site.github, icon: <GitHubIcon className="size-5" /> });
   if (site.telegram) items.push({ label: c.telegram, value: site.telegram.replace(/^https?:\/\/(t\.me\/)?/, "@"), href: site.telegram, icon: <TelegramIcon className="size-5" /> });
   if (site.linkedin) items.push({ label: c.linkedin, value: "LinkedIn", href: site.linkedin, icon: <LinkedInIcon className="size-5" /> });
   if (site.cvUrl) items.push({ label: c.cv, value: "PDF", href: site.cvUrl, icon: <FileDown className="size-5" aria-hidden /> });
 
   return (
-    <Section id="contact" eyebrow={c.eyebrow} title={c.title} lead={c.lead} className="border-t border-border bg-bg-muted/40">
-      <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <Section id="contact" eyebrow={c.eyebrow} title={c.title} lead={site.email ? `${c.lead} ${c.leadEmail}` : c.lead} className="border-t border-border bg-bg-muted/40">
+      <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((item, i) => {
           const external = /^https?:/.test(item.href);
           return (
@@ -33,7 +33,7 @@ export function Contact({ dict }: { dict: Dictionary }) {
                 <span className="grid size-11 shrink-0 place-items-center rounded-md bg-accent-soft text-fg">{item.icon}</span>
                 <span className="min-w-0">
                   <span className="block truncate font-mono text-[11px] uppercase tracking-[0.18em] text-fg-subtle">{item.label}</span>
-                  <span className="block truncate text-sm font-medium text-fg group-hover:text-accent">{item.value}</span>
+                  <span className="block text-sm font-medium break-all text-fg group-hover:text-accent">{item.value}</span>
                 </span>
               </a>
             </Reveal>

@@ -147,7 +147,8 @@ const en = {
   contact: {
     eyebrow: "Contact",
     title: "Let’s build something.",
-    lead: "Open to full-time roles, contract work and partnerships. The fastest way to reach me is e-mail.",
+    lead: "Open to full-time roles, contract work and partnerships.",
+    leadEmail: "The fastest way to reach me is e-mail.",
     email: "E-mail",
     github: "GitHub",
     telegram: "Telegram",

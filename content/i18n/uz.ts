@@ -147,7 +147,8 @@ const uz: Dictionary = {
   contact: {
     eyebrow: "Aloqa",
     title: "Keling, biror narsa quraylik.",
-    lead: "Doimiy ish, shartnoma va hamkorlik uchun ochiqman. Eng tez yo‘l — elektron pochta.",
+    lead: "Doimiy ish, shartnoma va hamkorlik uchun ochiqman.",
+    leadEmail: "Eng tez yo‘l — elektron pochta.",
     email: "E-mail",
     github: "GitHub",
     telegram: "Telegram",

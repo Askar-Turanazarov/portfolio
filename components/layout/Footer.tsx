@@ -17,9 +17,11 @@ export function Footer({ dict }: { dict: Dictionary }) {
         <div className="flex flex-col gap-2 sm:items-end">
           <p className="max-w-md sm:text-right">{dict.footer.built}</p>
           <div className="flex items-center gap-4">
-            <a href={`mailto:${site.email}`} className="transition hover:text-fg">
-              {site.email}
-            </a>
+            {site.email && (
+              <a href={`mailto:${site.email}`} className="transition hover:text-fg">
+                {site.email}
+              </a>
+            )}
             <a
               href={site.github}
               target="_blank"
