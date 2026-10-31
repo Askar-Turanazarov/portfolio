@@ -18,6 +18,10 @@ export const tags = [
 ] as const;
 export type Tag = (typeof tags)[number];
 
+/** Modules of the «Assembly» board. Labels live in content/modules.ts. */
+export const moduleIds = ["web", "bot", "miniapp", "admin", "ai", "rag", "pay", "threed", "i18n", "mcp"] as const;
+export type ModuleId = (typeof moduleIds)[number];
+
 export const statuses = ["live", "live-cold", "code", "archived"] as const;
 export type Status = (typeof statuses)[number];
 
@@ -36,6 +40,12 @@ export const ProjectSchema = z.object({
   /** Which real business this applies to. */
   forBusiness: L10nSchema,
   tags: z.array(z.enum(tags)).min(1),
+  /** Which of the ten modules the product is assembled from (the «Assembly» board). */
+  modules: z.array(z.enum(moduleIds)).min(1),
+  /** One line of essence for the flagship strip. Featured projects only. */
+  essence: L10nSchema.optional(),
+  /** Figure caption for the spread: what is on the screenshot and in which state. */
+  caption: L10nSchema.optional(),
   stack: z.array(z.string().min(1)).min(1),
   links: z.object({
     live: z.url().optional(),
