@@ -161,7 +161,8 @@ export function StreetStage({ taglines, posterDay, posterEvening, stageLabel, ca
       </picture>
       <picture className="poster eve">
         <source media="(max-width: 767px)" srcSet="/street/poster-evening-m.webp" />
-        <img src="/street/poster-evening.webp" alt={posterEvening} fetchPriority="high" width={2160} height={1350} />
+        {/* Lazy: a poster hidden by the theme is not fetched, so a day visitor never pays for the evening one. */}
+        <img src="/street/poster-evening.webp" alt={posterEvening} loading="lazy" width={2160} height={1350} />
       </picture>
       <div ref={stage} className="stage" data-state="idle" role="img" aria-label={stageLabel} />
       <div ref={label} className="label" hidden>
