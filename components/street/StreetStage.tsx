@@ -73,6 +73,7 @@ export function StreetStage({ taglines, posterDay, posterEvening, stageLabel, ca
           time: isDark() ? "evening" : "day",
           still: q.has("still"),
           debug: q.has("debug"),
+          govern: q.get("gov") !== "0",
           texturePath: "/street/tex/",
           onHover(slug, pt, b) {
             const lb = label.current;

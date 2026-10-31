@@ -21,6 +21,8 @@ export type SceneOptions = {
   onQuality?: ((level: Quality, gpu: GpuInfo) => void) | null;
   /** Mount the diagnostic overlay (renderer, level, frame times, draw calls). */
   debug?: boolean;
+  /** Let the governor change the level (off for measurements). */
+  govern?: boolean;
 };
 
 export type SceneStats = {
