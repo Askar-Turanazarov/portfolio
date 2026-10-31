@@ -14,7 +14,7 @@
   --rule-strong: oklch(0.78 0.008 90);
   --garnet: oklch(0.46 0.15 22);
   --live: oklch(0.5 0.12 150);
-  --cold: oklch(0.6 0.12 75);
+  --cold: oklch(0.48 0.1 75);
   --glass: oklch(0.965 0.005 95 / 0.72);
   --glass-edge: oklch(0 0 0 / 0.06);
   --show-day: block;
@@ -346,6 +346,9 @@ html:has(.street) body {
   margin: 0;
   padding: 0;
   list-style: none;
+}
+.street .strip ol {
+  display: contents;
 }
 .street .strip h2 {
   grid-column: 1 / -1;
