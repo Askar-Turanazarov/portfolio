@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import type { SceneHandle } from "@/lib/street/scene";
+import type { Quality, SceneHandle } from "@/lib/street/scene";
 import { setScene } from "@/lib/street/bridge";
 
 type Props = {
@@ -53,10 +53,9 @@ export function StreetStage({ taglines, posterDay, posterEvening, stageLabel, ca
       return;
     }
 
-    const cores = navigator.hardwareConcurrency || 4;
-    const mem = (navigator as Navigator & { deviceMemory?: number }).deviceMemory || 8;
-    const tierQ = q.get("tier");
-    const tier = tierQ === "high" || tierQ === "mid" ? tierQ : cores >= 8 && mem >= 8 ? "high" : "mid";
+    // The quality level is chosen inside the scene from the GPU the context lands on; ?q= overrides it.
+    const qualityQ = q.get("q");
+    const quality: Quality | null = qualityQ === "low" || qualityQ === "mid" || qualityQ === "high" || qualityQ === "ultra" ? qualityQ : null;
 
     let cancelled = false;
     let sc: SceneHandle | null = null;
@@ -70,9 +69,10 @@ export function StreetStage({ taglines, posterDay, posterEvening, stageLabel, ca
         const { createScene } = await import("@/lib/street/scene.js");
         if (cancelled) return;
         sc = createScene(el, {
-          tier,
+          quality,
           time: isDark() ? "evening" : "day",
           still: q.has("still"),
+          debug: q.has("debug"),
           texturePath: "/street/tex/",
           onHover(slug, pt, b) {
             const lb = label.current;
@@ -87,6 +87,9 @@ export function StreetStage({ taglines, posterDay, posterEvening, stageLabel, ca
             lb.style.setProperty("--acc", b.accent);
             lb.style.transform = `translate(${pt.x.toFixed(0)}px, ${pt.y.toFixed(0)}px) translate(-50%, -100%)`;
           },
+          onQuality(level) {
+            el.dataset.quality = level;
+          },
           onPick(slug) {
             const target = document.getElementById(`spread-${slug}`) ?? document.getElementById(`row-${slug}`);
             if (!target) return;
@@ -98,7 +101,8 @@ export function StreetStage({ taglines, posterDay, posterEvening, stageLabel, ca
         setScene(sc);
         setMode("scene");
         el.dataset.state = "live";
-        el.dataset.tier = tier;
+        el.dataset.quality = sc.level;
+        el.dataset.gpu = sc.gpu.kind;
         sc.ready.then(() => {
           el.dataset.loaded = "1";
         });
