@@ -56,6 +56,12 @@ export function StreetStage({ taglines, posterDay, posterEvening, stageLabel, ca
     // The quality level is chosen inside the scene from the GPU the context lands on; ?q= overrides it.
     const qualityQ = q.get("q");
     const quality: Quality | null = qualityQ === "low" || qualityQ === "mid" || qualityQ === "high" || qualityQ === "ultra" ? qualityQ : null;
+    // ?hfov= and ?h= exist to compare fields of view and eye heights; the scene has its own defaults
+    const num = (key: string, lo: number, hi: number) => {
+      const v = Number(q.get(key));
+      return q.has(key) && Number.isFinite(v) && v >= lo && v <= hi ? v : undefined;
+    };
+    const hfov = num("hfov", 60, 130), eye = num("h", 1.2, 6);
 
     let cancelled = false;
     let sc: SceneHandle | null = null;
@@ -74,6 +80,8 @@ export function StreetStage({ taglines, posterDay, posterEvening, stageLabel, ca
           still: q.has("still"),
           debug: q.has("debug"),
           govern: q.get("gov") !== "0",
+          hfov,
+          eye,
           texturePath: "/street/tex/",
           onHover(slug, pt, b) {
             const lb = label.current;

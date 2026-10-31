@@ -23,6 +23,10 @@ export type SceneOptions = {
   debug?: boolean;
   /** Let the governor change the level (off for measurements). */
   govern?: boolean;
+  /** Horizontal field of view in degrees (default 100). */
+  hfov?: number;
+  /** Eye height in metres (default 2.4). */
+  eye?: number;
 };
 
 export type SceneStats = {
