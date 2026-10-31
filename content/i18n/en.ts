@@ -207,7 +207,7 @@ const en = {
     },
     hero: {
       place: "Tashkent, July – October 2026",
-      say: "Twenty products for twenty businesses. All standing on one street.",
+      say: "Finished products you can open and try.",
       lede: "I build complete AI products for real business processes: a site, a Telegram bot, an admin panel, an AI assistant and payments, in three languages and tuned to the Uzbek market.",
       flagships: "Six flagships",
       caption: "The street: twenty buildings, twenty projects.",

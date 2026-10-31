@@ -207,7 +207,7 @@ const uz: Dictionary = {
     },
     hero: {
       place: "Toshkent, iyul — oktyabr 2026",
-      say: "Yigirma biznes uchun yigirma mahsulot. Hammasi bir ko‘chada turibdi.",
+      say: "Ochib, sinab ko‘rish mumkin bo‘lgan tayyor mahsulotlar.",
       lede: "Men haqiqiy biznes jarayonlari uchun tugallangan AI mahsulotlar yig‘aman: sayt, Telegram bot, admin panel, AI yordamchi va to‘lov — uch tilda va O‘zbekiston bozorini hisobga olib.",
       flagships: "Oltita flagman",
       caption: "Ko‘cha: yigirma bino — yigirma loyiha.",
