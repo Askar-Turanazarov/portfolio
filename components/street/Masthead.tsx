@@ -4,7 +4,8 @@ import { site } from "@/content/site";
 import { DesignSwitch } from "@/components/layout/DesignSwitch";
 import { ThemeSwitch } from "./ThemeSwitch";
 
-export function Masthead({ dict, locale }: { dict: Dictionary; locale: Locale }) {
+/** `anchorBase` points the section links at the home page from a page that does not have those sections. */
+export function Masthead({ dict, locale, anchorBase = "" }: { dict: Dictionary; locale: Locale; anchorBase?: string }) {
   const t = dict.street.nav;
   return (
     <header className="g mast">
@@ -13,8 +14,8 @@ export function Masthead({ dict, locale }: { dict: Dictionary; locale: Locale })
           {site.name}
         </a>
         <nav aria-label={t.sections}>
-          <a href="#flagships">{t.flagships}</a>
-          <a href="#index">{t.index}</a>
+          <a href={`${anchorBase}#flagships`}>{t.flagships}</a>
+          <a href={`${anchorBase}#index`}>{t.index}</a>
           <a className="hide-sm" href={site.github} target="_blank" rel="noopener noreferrer">
             {t.github}
           </a>

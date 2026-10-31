@@ -1,5 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <rect width="64" height="64" rx="14" fill="#1d1a17"/>
-  <text x="32" y="41" text-anchor="middle" font-family="Manrope, Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="27" font-weight="700" letter-spacing="-1" fill="#f7f4ef">AT</text>
-  <circle cx="51" cy="13" r="5" fill="#e8873a"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#343e7d"/>
+  <path d="M0 50h64v0a14 14 0 0 1-14 14H14A14 14 0 0 1 0 50z" fill="#1d1820"/>
+  <rect x="14" y="16" width="36" height="34" fill="#f4efe8"/>
+  <rect x="11" y="13" width="42" height="5" fill="#1d1820"/>
+  <rect x="18" y="23" width="28" height="6" fill="#a8324a"/>
+  <rect x="19" y="34" width="10" height="16" fill="#1d1820"/>
+  <rect x="33" y="34" width="12" height="10" fill="#e9a94f"/>
 </svg>

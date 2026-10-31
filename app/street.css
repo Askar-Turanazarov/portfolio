@@ -314,6 +314,25 @@ html:has(.street) body {
   display: none;
 }
 
+/* not found */
+.street .lost {
+  padding-block: clamp(72px, 16vh, 160px);
+}
+.street .lost .code {
+  margin: 0 0 16px;
+  color: var(--ink-2);
+}
+.street .lost h1 {
+  margin: 0 0 16px;
+  font: 500 clamp(40px, 6vw, 72px) / 1.08 var(--serif);
+  letter-spacing: -0.01em;
+}
+.street .lost .lead {
+  max-width: 42ch;
+  margin: 0 0 28px;
+  color: var(--ink-2);
+}
+
 /* flagship strip */
 .street .strip {
   background: var(--sunken);
