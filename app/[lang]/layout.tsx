@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import "../globals.css";
+import "../street.css";
 import { defaultLocale, hasLocale, locales, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionary";
 import { site } from "@/content/site";
