@@ -26,7 +26,7 @@ export function Hero({ dict, locale }: { dict: Dictionary; locale: Locale }) {
         <p className="mt-6 max-w-2xl text-lg leading-relaxed text-fg-muted sm:text-xl">{h.subtitle}</p>
 
         <div className="mt-10 flex flex-wrap gap-3">
-          <ButtonLink href={`/${locale}#projects`} size="lg">
+          <ButtonLink href={`/${locale}/v2#projects`} size="lg">
             {h.ctaProjects}
             <ArrowDown className="size-4" aria-hidden />
           </ButtonLink>
@@ -34,7 +34,7 @@ export function Hero({ dict, locale }: { dict: Dictionary; locale: Locale }) {
             <GitHubIcon className="size-4" />
             {h.ctaGithub}
           </ButtonLink>
-          <ButtonLink href={`/${locale}#contact`} variant="ghost" size="lg">
+          <ButtonLink href={`/${locale}/v2#contact`} variant="ghost" size="lg">
             {h.ctaContact}
             <ArrowUpRight className="size-4" aria-hidden />
           </ButtonLink>

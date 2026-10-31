@@ -6,6 +6,7 @@ import { Container } from "@/components/ui/Container";
 import { GitHubIcon } from "@/components/ui/icons";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 import { ThemeToggle } from "./ThemeToggle";
+import { DesignSwitch } from "./DesignSwitch";
 
 export function Header({ dict, locale }: { dict: Dictionary; locale: Locale }) {
   const nav = [
@@ -20,7 +21,7 @@ export function Header({ dict, locale }: { dict: Dictionary; locale: Locale }) {
   return (
     <header className="sticky top-0 z-40 border-b border-border/70 bg-bg/80 backdrop-blur-md">
       <Container className="flex h-16 items-center justify-between gap-4">
-        <Link href={`/${locale}`} className="flex items-center gap-3" aria-label={site.name}>
+        <Link href={`/${locale}/v2`} className="flex items-center gap-3" aria-label={site.name}>
           <span className="grid size-9 place-items-center rounded-md bg-fg font-display text-sm font-bold tracking-tight text-bg">
             {site.monogram}
           </span>
@@ -31,7 +32,7 @@ export function Header({ dict, locale }: { dict: Dictionary; locale: Locale }) {
           {nav.map((item) => (
             <Link
               key={item.href}
-              href={`/${locale}${item.href}`}
+              href={`/${locale}/v2${item.href}`}
               className="rounded-md px-3 py-2 text-sm text-fg-muted transition hover:bg-bg-muted hover:text-fg"
             >
               {item.label}
@@ -40,6 +41,9 @@ export function Header({ dict, locale }: { dict: Dictionary; locale: Locale }) {
         </nav>
 
         <div className="flex items-center gap-2">
+          <DesignSwitch to="street" href={`/${locale}`} className="hidden rounded-md px-3 py-2 text-sm text-fg-muted transition hover:bg-bg-muted hover:text-fg sm:inline-block">
+            {dict.nav.newSite}
+          </DesignSwitch>
           <a
             href={site.github}
             target="_blank"

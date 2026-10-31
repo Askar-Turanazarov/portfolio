@@ -14,6 +14,8 @@ const ru: Dictionary = {
     journey: "Путь",
     contact: "Контакты",
     github: "GitHub",
+    newSite: "Новый сайт",
+    v2: "Версия 2",
   },
   hero: {
     eyebrow: "Full-stack и AI-разработчик · Ташкент",

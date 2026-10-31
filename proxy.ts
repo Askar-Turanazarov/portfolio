@@ -18,8 +18,16 @@ function negotiate(request: NextRequest): string {
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const first = pathname.split("/")[1];
-  if (first && (locales as readonly string[]).includes(first)) return;
+  const [, first, second] = pathname.split("/");
+  if (first && (locales as readonly string[]).includes(first)) {
+    // The bare locale path shows the street design unless the visitor chose version 2 (cookie set by DesignSwitch).
+    if (!second && request.cookies.get("design")?.value === "v2") {
+      const url = request.nextUrl.clone();
+      url.pathname = `/${first}/v2`;
+      return NextResponse.redirect(url, 307);
+    }
+    return;
+  }
 
   const locale = negotiate(request);
   const url = request.nextUrl.clone();

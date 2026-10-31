@@ -1,17 +1,10 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono, Manrope } from "next/font/google";
 import type { ReactNode } from "react";
 import "../globals.css";
 import { defaultLocale, hasLocale, locales, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionary";
 import { site } from "@/content/site";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
-
-const inter = Inter({ subsets: ["latin", "cyrillic"], variable: "--font-inter", display: "swap" });
-const manrope = Manrope({ subsets: ["latin", "cyrillic"], variable: "--font-manrope", display: "swap" });
-const jetbrains = JetBrains_Mono({ subsets: ["latin", "cyrillic"], variable: "--font-jetbrains", display: "swap" });
 
 type Params = Promise<{ lang: string }>;
 
@@ -48,18 +41,13 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   };
 }
 
+/** Only the document shell and the theme provider; each design brings its own fonts and chrome. */
 export default async function RootLayout({ children, params }: { children: ReactNode; params: Params }) {
   const locale = resolveLocale((await params).lang);
-  const dict = await getDictionary(locale);
-
   return (
-    <html lang={locale} suppressHydrationWarning className={`${inter.variable} ${manrope.variable} ${jetbrains.variable}`}>
-      <body className="flex min-h-dvh flex-col font-sans antialiased">
-        <ThemeProvider>
-          <Header dict={dict} locale={locale} />
-          <main className="flex-1">{children}</main>
-          <Footer dict={dict} />
-        </ThemeProvider>
+    <html lang={locale} suppressHydrationWarning>
+      <body className="antialiased">
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

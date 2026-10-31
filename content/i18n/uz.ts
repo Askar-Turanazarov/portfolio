@@ -14,6 +14,8 @@ const uz: Dictionary = {
     journey: "Yo‘l",
     contact: "Aloqa",
     github: "GitHub",
+    newSite: "Yangi sayt",
+    v2: "2-versiya",
   },
   hero: {
     eyebrow: "Full-stack va AI dasturchi · Toshkent",

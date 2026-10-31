@@ -14,6 +14,8 @@ const en = {
     journey: "Journey",
     contact: "Contact",
     github: "GitHub",
+    newSite: "New site",
+    v2: "Version 2",
   },
   hero: {
     eyebrow: "Full-stack & AI developer · Tashkent",
