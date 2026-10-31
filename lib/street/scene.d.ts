@@ -25,7 +25,7 @@ export type SceneOptions = {
   govern?: boolean;
   /** Horizontal field of view in degrees (default 100). */
   hfov?: number;
-  /** Eye height in metres (default 2.4). */
+  /** Eye height in metres (default 3). */
   eye?: number;
 };
 
