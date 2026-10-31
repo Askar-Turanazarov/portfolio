@@ -14,13 +14,13 @@ export function Masthead({ dict, locale, anchorBase = "" }: { dict: Dictionary; 
           {site.name}
         </a>
         <nav aria-label={t.sections}>
-          <a href={`${anchorBase}#flagships`}>{t.flagships}</a>
-          <a href={`${anchorBase}#index`}>{t.index}</a>
-          <a className="hide-sm" href={site.github} target="_blank" rel="noopener noreferrer">
+          <a className="hide-xs" href={`${anchorBase}#flagships`}>{t.flagships}</a>
+          <a className="hide-xs" href={`${anchorBase}#index`}>{t.index}</a>
+          <a className="hide-sm hide-md" href={site.github} target="_blank" rel="noopener noreferrer">
             {t.github}
           </a>
           {site.email && (
-            <a className="hide-sm" href={`mailto:${site.email}`}>
+            <a className="hide-sm hide-md" href={`mailto:${site.email}`}>
               {t.write}
             </a>
           )}

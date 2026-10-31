@@ -738,6 +738,36 @@ html:has(.street) body {
     grid-column: 2 / 12;
   }
 }
+/* the grid's thirteen gaps alone are wider than the smallest phones */
+@media (max-width: 380px) {
+  .street .g {
+    column-gap: 12px;
+  }
+}
+/* a tablet has no room for every link in the masthead or for module names set horizontally over the board */
+@media (max-width: 1023px) {
+  .street .mast nav .hide-md {
+    display: none;
+  }
+  .street .board thead th.mod {
+    width: auto;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    text-align: left;
+    padding: 10px 6px 0;
+    border-bottom: 0;
+  }
+  .street .board td.m {
+    white-space: normal;
+    padding-right: 12px;
+  }
+}
+/* a phone has room for the name and the day/evening switch; the hero links lead to the sections */
+@media (max-width: 560px) {
+  .street .mast nav .hide-xs {
+    display: none;
+  }
+}
 @media (max-width: 767px) {
   .street .mast .in {
     gap: 16px;
