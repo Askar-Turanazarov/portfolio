@@ -58,6 +58,7 @@ export type SceneStats = {
 };
 
 export type SceneHandle = {
+  /** Resolves after the first frame has been drawn (programs linked, textures uploaded, one render done). */
   ready: Promise<void>;
   gpu: GpuInfo;
   readonly level: Quality;

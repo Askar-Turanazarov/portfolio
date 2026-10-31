@@ -265,11 +265,14 @@ html:has(.street) body {
 .street .poster.eve {
   display: var(--show-eve);
 }
+/* the stage is laid out (and sized) while the scene boots behind the poster, but neither seen nor hit */
 .street .hero:not([data-mode="scene"]) .stage {
-  display: none;
+  visibility: hidden;
 }
+/* the poster stays painted while the canvas fades in over it, then leaves */
 .street .hero[data-mode="scene"] .poster {
-  display: none;
+  visibility: hidden;
+  transition: visibility 0s 1s;
 }
 .street .label {
   position: absolute;

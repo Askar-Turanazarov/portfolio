@@ -108,11 +108,14 @@ export function StreetStage({ taglines, posterDay, posterEvening, stageLabel, ca
           },
         });
         setScene(sc);
-        setMode("scene");
-        el.dataset.state = "live";
         el.dataset.quality = sc.level;
         el.dataset.gpu = sc.gpu.kind;
+        // the poster stays until the first frame is drawn (programs linked, textures uploaded), then the canvas
+        // fades in over it
         sc.ready.then(() => {
+          if (cancelled) return;
+          setMode("scene");
+          el.dataset.state = "live";
           el.dataset.loaded = "1";
         });
         io = new IntersectionObserver(([e]) => sc?.pause(!e.isIntersecting || document.hidden), { threshold: 0.05 });
