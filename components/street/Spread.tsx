@@ -33,6 +33,9 @@ export function Spread({ dict, locale, project: p, index, figure, side, hasCover
 
   return (
     <section className={`g spread ${hasCover ? side : "solo"}`} id={`spread-${p.slug}`} style={style} aria-labelledby={`h-${p.slug}`}>
+      <span className="depth-num" aria-hidden="true">
+        {num(index)}
+      </span>
       {hasCover && (
         <figure>
           <Image

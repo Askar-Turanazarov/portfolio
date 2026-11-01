@@ -602,6 +602,27 @@ html:has(.street) body {
 .street .spreads {
   position: relative;
   padding-block: 48px;
+  overflow-y: clip;
+  --fade: 110px;
+}
+/* the moving light dissolves into the ground before the section's edge would cut it */
+.street .spreads::before,
+.street .spread:last-child::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  height: var(--fade);
+  pointer-events: none;
+}
+.street .spreads::before {
+  top: 0;
+  background: linear-gradient(var(--paper), transparent);
+}
+.street .spread:last-child::after {
+  bottom: -48px;
+  background: linear-gradient(transparent, var(--paper));
 }
 .street .spreads::after {
   content: "";
@@ -641,6 +662,69 @@ html:has(.street) body {
   background: var(--glow) center / 100% 100% no-repeat;
   opacity: var(--glow-a);
   pointer-events: none;
+}
+/* Depth behind each spread. The numeral is in the grid area of the text, whose column it shares. */
+.street .depth-num {
+  position: absolute;
+  z-index: 0;
+  grid-row: 1;
+  top: -0.12em;
+  right: 0;
+  font: 400 clamp(170px, 20vw, 380px) / 0.8 var(--serif);
+  letter-spacing: -0.04em;
+  color: color-mix(in oklch, var(--ink) 7%, transparent);
+  pointer-events: none;
+  user-select: none;
+}
+.street .spread.odd .depth-num {
+  grid-column: 10 / 14;
+}
+.street .spread.even .depth-num {
+  grid-column: 2 / 6;
+  right: auto;
+  left: 0;
+}
+.street .spread.solo .depth-num {
+  grid-column: 9 / 14;
+}
+/* Scroll-driven and on the compositor, so the layers stay smooth whatever the main thread is doing. Browsers
+   without it, and readers who asked for less motion, get the same layers standing still. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .street .spread {
+      --far: clamp(90px, 15svh, 170px);
+      --mid: clamp(60px, 10svh, 110px);
+      --near: clamp(10px, 2.5svh, 26px);
+      view-timeline: --spread block;
+    }
+    .street .spread figure::before,
+    .street .depth-num,
+    .street .spread figure {
+      animation: depth linear both;
+      animation-timeline: --spread;
+      will-change: transform;
+    }
+    .street .spread figure::before {
+      --from: calc(var(--far) * -1);
+      --to: var(--far);
+    }
+    .street .depth-num {
+      --from: calc(var(--mid) * -1);
+      --to: var(--mid);
+    }
+    .street .spread figure {
+      --from: var(--near);
+      --to: calc(var(--near) * -1);
+    }
+  }
+}
+@keyframes depth {
+  from {
+    transform: translateY(var(--from));
+  }
+  to {
+    transform: translateY(var(--to));
+  }
 }
 .street .spread.odd figure {
   grid-column: 1 / 10;
@@ -1044,6 +1128,9 @@ html:has(.street) body {
   .street .row .m {
     white-space: normal;
   }
+  .street .spreads {
+    --fade: 80px;
+  }
   .street .spread {
     padding-block: 44px;
     row-gap: 18px;
@@ -1064,6 +1151,16 @@ html:has(.street) body {
   }
   .street .spread figcaption {
     padding-inline: var(--gutter) var(--gutter-r) !important;
+  }
+  .street .spread.odd .depth-num,
+  .street .spread.even .depth-num,
+  .street .spread.solo .depth-num {
+    grid-row: 2;
+    grid-column: content-start / content-end;
+    top: -0.05em;
+    right: 0;
+    left: auto;
+    font-size: 40vw;
   }
   .street .txt h2 {
     font-size: 32px;
