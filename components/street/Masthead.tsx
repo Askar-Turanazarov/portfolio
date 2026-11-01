@@ -4,8 +4,8 @@ import { site } from "@/content/site";
 import { DesignSwitch } from "@/components/layout/DesignSwitch";
 import { ThemeSwitch } from "./ThemeSwitch";
 
-/** `anchorBase` points the section links at the home page from a page that does not have those sections. */
-export function Masthead({ dict, locale, anchorBase = "" }: { dict: Dictionary; locale: Locale; anchorBase?: string }) {
+/** `anchorBase` points the section links at the home page from a page that does not have those sections; `langPath` keeps the current page when switching language. */
+export function Masthead({ dict, locale, anchorBase = "", langPath = "" }: { dict: Dictionary; locale: Locale; anchorBase?: string; langPath?: string }) {
   const t = dict.street.nav;
   return (
     <header className="g mast">
@@ -27,7 +27,7 @@ export function Masthead({ dict, locale, anchorBase = "" }: { dict: Dictionary; 
           <ul className="langs hide-sm" aria-label={t.languages}>
             {locales.map((l) => (
               <li key={l}>
-                <a href={`/${l}`} hrefLang={l} aria-current={l === locale ? "true" : undefined}>
+                <a href={`/${l}${langPath}`} hrefLang={l} aria-current={l === locale ? "true" : undefined}>
                   {l}
                 </a>
               </li>

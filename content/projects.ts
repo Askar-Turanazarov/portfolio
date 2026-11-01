@@ -8,6 +8,40 @@ const GH = "https://github.com/Askar-Turanazarov";
  */
 const raw: ProjectInput[] = [
   {
+    slug: "flightdelay",
+    name: "FlightDelay",
+    repo: "FlightDelay-Service",
+    tagline: {
+      en: "Pre-departure delay risk for a flight, with the reasons and the cost.",
+      ru: "Риск задержки рейса до вылета, с причинами и стоимостью.",
+      uz: "Uchishdan oldin reys kechikishi xavfi, sabablari va narxi bilan.",
+    },
+    problem: {
+      en: "A dispatcher needs the risk before departure, when only the schedule is known.",
+      ru: "Диспетчеру нужен риск до вылета, когда известно только расписание.",
+      uz: "Dispetcherga xavf uchishdan oldin, faqat jadval ma’lum paytda kerak.",
+    },
+    solution: {
+      en: "A CatBoost model with a recall-first threshold, SHAP explanations and an expected-loss estimate.",
+      ru: "Модель CatBoost с порогом в пользу полноты, объяснения SHAP и оценка ожидаемого убытка.",
+      uz: "Recall ustuvor chegarali CatBoost modeli, SHAP tushuntirishlari va kutilayotgan zarar bahosi.",
+    },
+    forBusiness: {
+      en: "Airline operations and any team deciding on rare, costly events.",
+      ru: "Операционные службы авиакомпаний и команды, принимающие решения о редких дорогих событиях.",
+      uz: "Aviakompaniya operatsion xizmatlari va kam uchraydigan qimmat hodisalar bo‘yicha qaror qiluvchi jamoalar.",
+    },
+    tags: ["ai"],
+    modules: ["web", "ai", "i18n"],
+    stack: ["Python", "CatBoost", "scikit-learn", "SHAP", "Streamlit", "Docker", "Hugging Face Hub"],
+    links: { live: "https://flight-delay-askar.streamlit.app", repo: `${GH}/FlightDelay-Service` },
+    status: "live-cold",
+    accent: "#ff6b6b",
+    // Not in the grid until it has a building on the street.
+    inGrid: false,
+    period: { from: "2026-10", to: "2026-11" },
+  },
+  {
     slug: "domus-estate",
     name: "Domus Estate",
     repo: "domus",
@@ -741,6 +775,28 @@ const raw: ProjectInput[] = [
     period: { from: "2026-07", to: "2026-08" },
   },
   {
+    slug: "galactic-vault",
+    name: "Galactic Vault",
+    repo: "galactic-vault",
+    tagline: {
+      en: "A concept store for rare artifacts of the universe, with teleport delivery, in one HTML file.",
+      ru: "Концепт-магазин редких артефактов вселенной с телепорт-доставкой в одном HTML-файле.",
+      uz: "Koinotning noyob artefaktlari uchun teleport yetkazib berishli konsept-do‘kon, bitta HTML faylda.",
+    },
+    problem: { en: "How much of a shop fits into a page with no build step.", ru: "Сколько магазина помещается в страницу без сборки.", uz: "Yig‘ishsiz sahifaga do‘konning qanchasi sig‘adi." },
+    solution: { en: "One index.html with Tailwind and Alpine.js from a CDN.", ru: "Один index.html с Tailwind и Alpine.js с CDN.", uz: "CDN’dan Tailwind va Alpine.js bilan bitta index.html." },
+    forBusiness: { en: "—", ru: "—", uz: "—" },
+    tags: ["fun", "ecommerce"],
+    modules: ["web"],
+    stack: ["HTML", "Tailwind CSS", "Alpine.js"],
+    links: { live: "https://askar-gvault.vercel.app", repo: `${GH}/galactic-vault` },
+    status: "live",
+    accent: "#00f0ff",
+    inGrid: false,
+    milestone: true,
+    period: { from: "2026-07", to: "2026-07" },
+  },
+  {
     slug: "magic-8-ball",
     name: "Magic 8 Ball",
     repo: "Magic-8Ball",
@@ -788,7 +844,26 @@ const raw: ProjectInput[] = [
 
 export const projects: Project[] = ProjectSchema.array().parse(raw);
 
-const bySlug = new Map(projects.map((p) => [p.slug, p]));
+/** A shared page for the clicker and the ball. Those two keep their own entries, so this one isn't counted in `projects`. */
+const firstSteps: Project = ProjectSchema.parse({
+  slug: "first-steps",
+  name: "First Steps",
+  repo: "my-first-clickerapp",
+  tagline: { en: "The first two things I built.", ru: "Первые две вещи, которые я собрал.", uz: "Men yig‘gan birinchi ikki narsa." },
+  problem: { en: "First lines of HTML, CSS and JavaScript.", ru: "Первые строки HTML, CSS и JavaScript.", uz: "HTML, CSS va JavaScript’ning birinchi qatorlari." },
+  solution: { en: "Two static pages on GitHub Pages.", ru: "Две статичные страницы на GitHub Pages.", uz: "GitHub Pages’dagi ikkita statik sahifa." },
+  forBusiness: { en: "—", ru: "—", uz: "—" },
+  tags: ["fun"],
+  modules: ["web"],
+  stack: ["HTML", "CSS", "JavaScript"],
+  links: { repo: `${GH}/my-first-clickerapp` },
+  status: "live",
+  accent: "#eab308",
+  inGrid: false,
+  period: { from: "2026-07", to: "2026-08" },
+});
+
+const bySlug = new Map([...projects, firstSteps].map((p) => [p.slug, p]));
 
 export function getProject(slug: string): Project | undefined {
   return bySlug.get(slug);

@@ -20,6 +20,13 @@ const nextConfig: NextConfig = {
       },
     },
   },
+  async redirects() {
+    return ["first-clicker", "magic-8-ball"].map((slug) => ({
+      source: `/:lang/projects/${slug}`,
+      destination: "/:lang/projects/first-steps",
+      permanent: true,
+    }));
+  },
   async headers() {
     return [{ source: "/(.*)", headers: securityHeaders }];
   },
