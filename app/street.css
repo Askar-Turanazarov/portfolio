@@ -15,6 +15,7 @@
   --garnet: oklch(0.45 0.15 265);
   --live: oklch(0.45 0.12 150);
   --cold: oklch(0.45 0.1 75);
+  --asleep: oklch(0.45 0.09 235);
   --glass: oklch(0.95 0.006 245 / 0.62);
   --glow-a: 0.32;
   --glass-edge: oklch(0 0 0 / 0.06);
@@ -37,6 +38,7 @@
   --garnet: oklch(0.78 0.11 265);
   --live: oklch(0.76 0.11 150);
   --cold: oklch(0.8 0.1 75);
+  --asleep: oklch(0.8 0.08 235);
   --glass: oklch(0.2 0.008 255 / 0.55);
   --glow-a: 0.3;
   --glass-edge: oklch(1 0 0 / 0.08);
@@ -718,7 +720,7 @@ html:has(.street) body {
   color: var(--live);
 }
 .street .cold {
-  color: var(--cold);
+  color: var(--asleep);
 }
 .street .code {
   color: var(--ink-2);

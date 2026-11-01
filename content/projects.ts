@@ -27,9 +27,9 @@ const raw: ProjectInput[] = [
       uz: "Recall ustuvor chegarali CatBoost modeli, SHAP tushuntirishlari va kutilayotgan zarar bahosi.",
     },
     forBusiness: {
-      en: "Airline operations and any team deciding on rare, costly events.",
-      ru: "Операционные службы авиакомпаний и команды, принимающие решения о редких дорогих событиях.",
-      uz: "Aviakompaniya operatsion xizmatlari va kam uchraydigan qimmat hodisalar bo‘yicha qaror qiluvchi jamoalar.",
+      en: "Airline operations and any team deciding on rare, costly events",
+      ru: "Операционные службы авиакомпаний и команды, принимающие решения о редких дорогих событиях",
+      uz: "Aviakompaniya operatsion xizmatlari va kam uchraydigan qimmat hodisalar bo‘yicha qaror qiluvchi jamoalar",
     },
     tags: ["ai"],
     modules: ["web", "ai", "i18n"],
