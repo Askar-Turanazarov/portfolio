@@ -74,7 +74,7 @@ export function CaseShell({
   children?: ReactNode;
 }) {
   const t = dict.street.spread;
-  const style = { "--ac": p.accent, "--ac-on": onColor(p.accent) } as CSSProperties;
+  const style = { "--ac": p.accent, "--ac-on": onColor(p.accent), "--glow": `url(/projects/${p.slug}/glow.webp)` } as CSSProperties;
   const target = p.links.live ?? p.links.repo;
   const host = new URL(target).host;
   const figures = c.metrics?.slice(0, 3) ?? [];

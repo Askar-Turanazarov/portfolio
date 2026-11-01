@@ -27,16 +27,3 @@ export function onColor(hex: string): "#000" | "#fff" {
   const Y = 0.2126 * lin((n >> 16) & 255) + 0.7152 * lin((n >> 8) & 255) + 0.0722 * lin(n & 255);
   return 1.05 / (Y + 0.05) > (Y + 0.05) / 0.05 ? "#fff" : "#000";
 }
-
-/**
- * The colour field a project spread stands on: its accent's hue at paper lightness by day
- * and at charcoal lightness by evening. Hue tells the projects apart, lightness stays calm.
- */
-export function fieldFor(hex: string): { light: string; dark: string } {
-  const { C, H } = oklch(hex);
-  const h = H.toFixed(0);
-  return {
-    light: `oklch(0.955 ${Math.min(0.02, C * 0.35).toFixed(3)} ${h})`,
-    dark: `oklch(0.30 ${Math.min(0.05, Math.max(0.03, C * 0.4)).toFixed(3)} ${h})`,
-  };
-}

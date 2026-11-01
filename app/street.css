@@ -1,21 +1,22 @@
 /* ------------------------------------------------------------------ */
 /* The street design (home route). Tokens follow plan A § 1: paper by  */
 /* day, cool graphite by evening; colour comes from the sky and from   */
-/* each project's own field, the blue accent is for links only.        */
+/* the light of each project's own screen, blue is for links only.     */
 /* Dark mode is the `.dark` class next-themes puts on <html>.          */
 /* ------------------------------------------------------------------ */
 :root {
-  --paper: oklch(0.975 0.002 255);
-  --raised: oklch(0.995 0.001 255);
-  --sunken: oklch(0.95 0.003 255);
-  --ink: oklch(0.2 0.008 255);
-  --ink-2: oklch(0.46 0.008 255);
-  --rule: oklch(0.89 0.003 255);
-  --rule-strong: oklch(0.78 0.005 255);
-  --garnet: oklch(0.48 0.15 265);
-  --live: oklch(0.5 0.12 150);
-  --cold: oklch(0.48 0.1 75);
-  --glass: oklch(0.98 0.002 255 / 0.62);
+  --paper: oklch(0.945 0.006 245);
+  --raised: oklch(0.965 0.006 245);
+  --sunken: oklch(0.915 0.009 245);
+  --ink: oklch(0.2 0.01 250);
+  --ink-2: oklch(0.43 0.012 250);
+  --rule: oklch(0.86 0.007 245);
+  --rule-strong: oklch(0.74 0.009 245);
+  --garnet: oklch(0.45 0.15 265);
+  --live: oklch(0.45 0.12 150);
+  --cold: oklch(0.45 0.1 75);
+  --glass: oklch(0.95 0.006 245 / 0.62);
+  --glow-a: 0.32;
   --glass-edge: oklch(0 0 0 / 0.06);
   --show-day: block;
   --show-eve: none;
@@ -37,6 +38,7 @@
   --live: oklch(0.76 0.11 150);
   --cold: oklch(0.8 0.1 75);
   --glass: oklch(0.2 0.008 255 / 0.55);
+  --glow-a: 0.3;
   --glass-edge: oklch(1 0 0 / 0.08);
   --show-day: none;
   --show-eve: block;
@@ -52,6 +54,7 @@ html:has(.street) body {
   --sans: var(--font-golos), "Golos Text", system-ui, sans-serif;
   --serif: var(--font-literata), Literata, Georgia, "Times New Roman", serif;
   min-height: 100dvh;
+  overflow-x: clip;
   background: var(--paper);
   color: var(--ink);
   font: 17px/1.45 var(--sans);
@@ -585,20 +588,49 @@ html:has(.street) body {
   display: none;
 }
 
-/* spreads */
+/* spreads: one continuous ground; the only colour is the light each project's screen throws past its frame */
+.street .spreads {
+  position: relative;
+  padding-block: 48px;
+}
+.street .spreads::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: url(/street/grain.png);
+  pointer-events: none;
+}
 .street .spread {
-  background: var(--field-light);
+  position: relative;
   padding-block: 72px;
   align-items: center;
   row-gap: 28px;
   scroll-margin-top: 60px;
 }
-.dark .street .spread {
-  background: var(--field-dark);
+.street .spread figure,
+.street .spread .txt {
+  position: relative;
+  z-index: 1;
+  grid-row: 1;
 }
 .street .spread figure {
   margin: 0;
   min-width: 0;
+}
+/* glow.webp holds the frame plus margins of 13% and 18% of its own size: this places it exactly around the 16:10 shot */
+.street .spread figure::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -17.57%;
+  width: 135.14%;
+  aspect-ratio: 1.384;
+  translate: 0 -18%;
+  z-index: -1;
+  background: var(--glow) center / 100% 100% no-repeat;
+  opacity: var(--glow-a);
+  pointer-events: none;
 }
 .street .spread.odd figure {
   grid-column: 1 / 10;
@@ -1002,6 +1034,10 @@ html:has(.street) body {
   .street .spread {
     padding-block: 44px;
     row-gap: 18px;
+  }
+  .street .spread figure,
+  .street .spread .txt {
+    grid-row: auto;
   }
   .street .spread.odd figure,
   .street .spread.even figure {

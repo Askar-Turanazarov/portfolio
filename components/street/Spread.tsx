@@ -4,7 +4,6 @@ import type { CSSProperties } from "react";
 import type { Dictionary } from "@/lib/dictionary";
 import { pick, type Locale } from "@/lib/i18n";
 import type { Project } from "@/lib/schema";
-import { fieldFor } from "@/lib/color";
 import { caseHref, num, periodLabel } from "@/lib/street/format";
 
 type Props = {
@@ -22,13 +21,12 @@ type Props = {
 const statusClass: Record<Project["status"], string> = { live: "live", "live-cold": "cold", code: "code", archived: "code" };
 
 /**
- * One flagship on its own colour field. With a screenshot: figure on one side, text on the other,
- * sides alternating. Without one (code-only projects) the text stands alone; no placeholder plate.
+ * One flagship. With a screenshot: figure on one side, text on the other, sides alternating, and the
+ * screen's own light around it. Without one (code-only projects) the text stands alone; no placeholder plate.
  */
 export function Spread({ dict, locale, project: p, index, figure, side, hasCover }: Props) {
   const t = dict.street.spread;
-  const field = fieldFor(p.accent);
-  const style = { "--field-light": field.light, "--field-dark": field.dark } as CSSProperties;
+  const style = hasCover ? ({ "--glow": `url(/projects/${p.slug}/glow.webp)` } as CSSProperties) : undefined;
   const caption = p.caption ? pick(p.caption, locale) : `${p.name}: ${t.screen}.`;
   const live = p.links.live;
   const status = t.status[p.status];

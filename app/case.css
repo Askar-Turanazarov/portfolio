@@ -1056,11 +1056,6 @@
   text-underline-offset: 4px;
 }
 
-.cs-hero {
-  background:
-    radial-gradient(60% 80% at 76% 44%, color-mix(in oklch, var(--ac) 26%, transparent), transparent 72%),
-    color-mix(in oklch, var(--ac) 12%, var(--paper));
-}
 .cs-hero .in {
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
@@ -1160,6 +1155,8 @@
   border-radius: 999px;
 }
 .cs-shot {
+  position: relative;
+  z-index: 0;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -1201,6 +1198,16 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+/* the light of the project's own screen, the same as around its spread on the home page */
+.cs-shot::before {
+  content: "";
+  position: absolute;
+  inset: -18% -17.57%;
+  z-index: -1;
+  background: var(--glow) center / 100% 100% no-repeat;
+  opacity: var(--glow-a);
+  pointer-events: none;
 }
 .cs-view {
   position: relative;

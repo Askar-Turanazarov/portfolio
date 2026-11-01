@@ -13,7 +13,7 @@ import { Interactions } from "@/components/street/Interactions";
 
 /**
  * Home: the street. Hero with the live scene, the flagships as a table of contents and as
- * spreads on their own colour fields, the «Assembly» board of all projects, the colophon.
+ * spreads in the light of their own screens, the «Assembly» board of all projects, the colophon.
  */
 export default async function HomePage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
@@ -35,9 +35,11 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
     <main>
       <Hero dict={dict} locale={lang} />
       <Flagships dict={dict} locale={lang} flagships={flagships} />
+      <div className="spreads">
       {spreads.map(({ p, i, has, figure, side }) => (
         <Spread key={p.slug} dict={dict} locale={lang} project={p} index={i} figure={figure} side={side} hasCover={has} />
       ))}
+      </div>
       <Assembly dict={dict} locale={lang} rows={ordered} />
       <Colophon dict={dict} />
       <Interactions />
