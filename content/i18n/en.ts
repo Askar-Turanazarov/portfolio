@@ -199,8 +199,8 @@ const en = {
       lede: "Every limb of this tree is a project, in the order I started them: from a browser clicker in July to a flight delay model in the autumn.",
       hint: "Scroll down and the tree grows, month by month.",
       alt: "A grown plane tree in the evening light: every limb is a project",
-      endTitle: "That is where it stands",
-      end: "The tree stops here for now. Each project above has its own page, and most of them can be opened and tried.",
+      endTitle: "The tree keeps growing",
+      end: "New projects will appear here as new branches. Each project above has its own page, and most of them can be opened and tried.",
       back: "Back to the street"
     },
     nav: {

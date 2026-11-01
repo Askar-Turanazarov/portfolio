@@ -199,8 +199,8 @@ const uz: Dictionary = {
       lede: "Bu daraxtning har bir yirik shoxi loyiha, men ularni boshlagan tartibda: iyuldagi brauzer klikeridan kuzdagi reys kechikishi modeligacha.",
       hint: "Pastga aylantiring, daraxt oyma-oy o‘sadi.",
       alt: "Oqshom yorug‘ida o‘sib bo‘lgan chinor: har bir yirik shox bu loyiha",
-      endTitle: "Hozircha shu yergacha",
-      end: "Daraxt hozircha shu yerda to‘xtaydi. Yuqoridagi har bir loyihaning o‘z sahifasi bor, ko‘pini ochib sinab ko‘rish mumkin.",
+      endTitle: "Daraxt o‘sishda davom etadi",
+      end: "Yangi loyihalar bu yerda yangi shoxlar bo‘lib paydo bo‘ladi. Yuqoridagi har bir loyihaning o‘z sahifasi bor, ko‘pini ochib sinab ko‘rish mumkin.",
       back: "Ko‘chaga qaytish"
     },
     nav: {
