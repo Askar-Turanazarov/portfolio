@@ -1026,6 +1026,46 @@ html:has(.street) body {
 .street .legend {
   display: none;
 }
+/* frozen rows, like a spreadsheet: the recipe and the column names stay under the masthead while the board scrolls.
+   Their heights are fixed so the header can sit right under the recipe and a hovered row never shifts the table. */
+@media (min-width: 1024px) and (min-height: 560px) {
+  .street .index {
+    --frozen-top: calc(env(safe-area-inset-top, 0px) + 61px);
+    --recipe-h: 60px;
+  }
+  .street .recipe {
+    position: sticky;
+    top: var(--frozen-top);
+    z-index: 5;
+    box-sizing: border-box;
+    height: var(--recipe-h);
+    margin-bottom: 0;
+    background: var(--paper);
+  }
+  .street .recipe .who {
+    min-width: 14.5em;
+    white-space: nowrap;
+  }
+  .street .board thead th {
+    position: sticky;
+    top: calc(var(--frozen-top) + var(--recipe-h));
+    z-index: 4;
+    padding-top: 8px;
+    background: var(--paper);
+    border-bottom: 0;
+    /* a collapsed border stays behind when the cell sticks */
+    box-shadow: inset 0 -1px 0 var(--rule-strong);
+  }
+  .street .board tbody tr {
+    scroll-margin-top: calc(var(--frozen-top) + var(--recipe-h) + 70px);
+  }
+}
+/* below this width the chips take two lines */
+@media (min-width: 1024px) and (max-width: 1279px) and (min-height: 560px) {
+  .street .index {
+    --recipe-h: 96px;
+  }
+}
 
 /* colophon */
 .street .colo {
