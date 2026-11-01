@@ -20,6 +20,12 @@ export type CaseContent = {
   /** Layers from the visitor down to storage. */
   arch?: { alt: L10n; layers: { label: L10n; nodes: string[] }[] };
   hard?: { title: L10n; text: L10n }[];
+  /** The experiments behind a model, in order, with what each one decided. */
+  journey?: {
+    lead: L10n;
+    rows: { when: L10n; what: L10n; result: L10n; decision: L10n; final?: boolean }[];
+    note: L10n;
+  };
   stack?: { tech: string; why: L10n }[];
   metrics?: { label: L10n; value: string; note?: L10n }[];
   /** Where the figures come from and when they were taken. */

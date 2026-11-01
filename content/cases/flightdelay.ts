@@ -124,6 +124,101 @@ export const flightdelay: CaseContent = {
       },
     },
   ],
+  journey: {
+    lead: {
+      en: "The final script trains in about 11 minutes, but its settings came out of a series of experiments. This is what the saved notebooks and reports show.",
+      ru: "Финальный скрипт обучается примерно за 11 минут, но его настройки появились по итогам серии экспериментов. Вот что показывают сохранившиеся тетрадки и отчёты.",
+      uz: "Yakuniy skript taxminan 11 daqiqada o‘qitiladi, ammo uning sozlamalari bir qator tajribalar natijasida paydo bo‘lgan. Saqlangan daftarlar va hisobotlar shuni ko‘rsatadi.",
+    },
+    rows: [
+      {
+        when: { en: "18 Jan", ru: "18.01", uz: "18.01" },
+        what: {
+          en: "CatBoost with and without PCA, 1 million rows",
+          ru: "CatBoost с PCA и без него, 1 млн строк",
+          uz: "PCA bilan va usiz CatBoost, 1 mln qator",
+        },
+        result: { en: "AUC 0.714 and 0.776", ru: "AUC 0,714 и 0,776", uz: "AUC 0,714 va 0,776" },
+        decision: { en: "Dropped PCA", ru: "Отказ от PCA", uz: "PCA dan voz kechildi" },
+      },
+      {
+        when: { en: "18 Jan", ru: "18.01", uz: "18.01" },
+        what: {
+          en: "Target “more than 45 minutes late”, 1.1 million rows",
+          ru: "Цель «опоздание больше 45 минут», 1,1 млн строк",
+          uz: "Maqsad “45 daqiqadan ko‘p kechikish”, 1,1 mln qator",
+        },
+        result: { en: "AUC 0.784, precision 0.21", ru: "AUC 0,784, точность 0,21", uz: "AUC 0,784, aniqlik 0,21" },
+        decision: { en: "Back to 15 minutes", ru: "Возврат к 15 минутам", uz: "15 daqiqaga qaytildi" },
+      },
+      {
+        when: { en: "19 Jan", ru: "19.01", uz: "19.01" },
+        what: {
+          en: "Aircraft history features (tail_reliability, TAIL_NUMBER), 2.1 million rows",
+          ru: "Признаки истории борта (tail_reliability, TAIL_NUMBER), 2,1 млн строк",
+          uz: "Bort tarixi belgilari (tail_reliability, TAIL_NUMBER), 2,1 mln qator",
+        },
+        result: { en: "AUC 0.712, 14 minutes", ru: "AUC 0,712, 14 минут", uz: "AUC 0,712, 14 daqiqa" },
+        decision: { en: "Rejected", ru: "Отказ", uz: "Rad etildi" },
+      },
+      {
+        when: { en: "19 Jan", ru: "19.01", uz: "19.01" },
+        what: {
+          en: "An ensemble of CatBoost and LightGBM",
+          ru: "Ансамбль CatBoost и LightGBM",
+          uz: "CatBoost va LightGBM ansambli",
+        },
+        result: { en: "AUC 0.776, 12.5 minutes", ru: "AUC 0,776, 12,5 минуты", uz: "AUC 0,776, 12,5 daqiqa" },
+        decision: { en: "Rejected: worse than CatBoost alone", ru: "Отказ: хуже одного CatBoost", uz: "Rad etildi: yolg‘iz CatBoost dan yomonroq" },
+      },
+      {
+        when: { en: "19 Jan", ru: "19.01", uz: "19.01" },
+        what: {
+          en: "CatBoost alone, scale_pos_weight 3.9",
+          ru: "Один CatBoost, scale_pos_weight 3,9",
+          uz: "Yolg‘iz CatBoost, scale_pos_weight 3,9",
+        },
+        result: { en: "AUC 0.7859", ru: "AUC 0,7859", uz: "AUC 0,7859" },
+        decision: { en: "Close, kept tuning", ru: "Близко, подбор продолжен", uz: "Yaqin, tanlash davom etdi" },
+      },
+      {
+        when: { en: "19–20 Jan", ru: "19–20.01", uz: "19–20.01" },
+        what: {
+          en: "CatBoost alone, scale_pos_weight 4.2",
+          ru: "Один CatBoost, scale_pos_weight 4,2",
+          uz: "Yolg‘iz CatBoost, scale_pos_weight 4,2",
+        },
+        result: { en: "AUC 0.7860, 10 min 37 s", ru: "AUC 0,7860, 10 мин 37 с", uz: "AUC 0,7860, 10 daq 37 s" },
+        decision: { en: "The final model", ru: "Финальная модель", uz: "Yakuniy model" },
+        final: true,
+      },
+      {
+        when: { en: "After", ru: "Затем", uz: "Keyin" },
+        what: {
+          en: "A threshold sweep from 0.20 to 0.50",
+          ru: "Перебор порога от 0,20 до 0,50",
+          uz: "0,20 dan 0,50 gacha chegarani saralash",
+        },
+        result: { en: "0.37: recall 0.818, precision 0.306", ru: "0,37: полнота 0,818, точность 0,306", uz: "0,37: to‘liqlik 0,818, aniqlik 0,306" },
+        decision: { en: "Threshold 0.37", ru: "Выбран порог 0,37", uz: "0,37 chegara tanlandi" },
+      },
+      {
+        when: { en: "October", ru: "Октябрь", uz: "Oktabr" },
+        what: {
+          en: "Six compact configurations for free hosting",
+          ru: "6 компактных конфигураций для бесплатного хостинга",
+          uz: "Bepul xosting uchun 6 ta ixcham konfiguratsiya",
+        },
+        result: { en: "AUC 0.779, 114 MB", ru: "AUC 0,779, 114 МБ", uz: "AUC 0,779, 114 MB" },
+        decision: { en: "Configuration E in the demo", ru: "Конфигурация E в демо", uz: "Demoda E konfiguratsiyasi" },
+      },
+    ],
+    note: {
+      en: "Alongside these runs I tuned the CatBoost hyperparameters and tried other seed values, checking the metrics each time. The diploma report notes that Lossguide trees overfitted on 2 million rows and more, while symmetric trees generalised better. I did not keep the logs of those runs, so there are no exact figures for them here.",
+      ru: "Параллельно с этими прогонами я подбирал гиперпараметры CatBoost и пробовал другие значения seed, каждый раз проверяя показатели. В отчёте к диплому отмечено, что деревья Lossguide переобучались на 2 млн строк и больше, а симметричные обобщали лучше. Логи этих прогонов я не сохранил, поэтому точных цифр по ним здесь нет.",
+      uz: "Bu sinovlar bilan birga CatBoost giperparametrlarini tanladim va boshqa seed qiymatlarini sinab ko‘rdim, har safar ko‘rsatkichlarni tekshirdim. Diplom hisobotida Lossguide daraxtlari 2 mln va undan ko‘p qatorda qayta o‘qitilgani, simmetrik daraxtlar esa yaxshiroq umumlashtirgani qayd etilgan. Bu sinovlar loglarini saqlamaganman, shuning uchun ular bo‘yicha aniq raqamlar bu yerda yo‘q.",
+    },
+  },
   stack: [
     {
       tech: "CatBoost",
@@ -183,15 +278,19 @@ export const flightdelay: CaseContent = {
       label: { en: "Test set", ru: "Тестовая выборка", uz: "Test to‘plami" },
       value: "408 907",
       note: {
-        en: "20% of the flights. The model never saw these in training. The split keeps the share of delays the same in both parts.",
-        ru: "20% рейсов. При обучении модель их не видела. Разбиение сохраняет долю задержек одинаковой в обеих частях.",
-        uz: "Reyslarning 20%. O‘qitishda model ularni ko‘rmagan. Bo‘linish ikkala qismda kechikish ulushini bir xil saqlaydi.",
+        en: "20% of the flights. The model never saw these in training. The split is random and keeps the share of delays the same in both parts.",
+        ru: "20% рейсов. При обучении модель их не видела. Разбиение случайное и сохраняет долю задержек одинаковой в обеих частях.",
+        uz: "Reyslarning 20%. O‘qitishda model ularni ko‘rmagan. Bo‘linish tasodifiy va ikkala qismda kechikish ulushini bir xil saqlaydi.",
       },
     },
     {
       label: { en: "Training", ru: "Обучение", uz: "O‘qitish" },
       value: "≈ 11 min",
-      note: { en: "On an RTX 4050.", ru: "На RTX 4050.", uz: "RTX 4050 da." },
+      note: {
+        en: "One run of the final script on an RTX 4050, after the experiments above.",
+        ru: "Один запуск финального скрипта на RTX 4050, уже после экспериментов выше.",
+        uz: "Yuqoridagi tajribalardan keyin RTX 4050 da yakuniy skriptning bitta ishga tushirilishi.",
+      },
     },
   ],
   metricsSource: {

@@ -153,7 +153,90 @@
   font-size: 14px;
   color: var(--ink-2);
 }
+.case .runs {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+}
+.case .runs th,
+.case .runs td {
+  padding: 12px 20px 12px 0;
+  border-bottom: 1px solid var(--rule);
+  text-align: left;
+  font-weight: 400;
+  vertical-align: baseline;
+}
+.case .runs thead th {
+  color: var(--ink-2);
+  font-size: 14px;
+  border-bottom-color: var(--rule-strong);
+}
+.case .runs .when {
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+.case .runs .res {
+  font-weight: 600;
+}
+.case .runs .dec {
+  color: var(--ink-2);
+}
+.case .runs [data-final] .dec {
+  color: var(--ink);
+  font-weight: 600;
+}
+.case .runs [data-final] td,
+.case .runs [data-final] th {
+  background: color-mix(in oklch, var(--ac) 10%, transparent);
+}
+.case .runs [data-final] .when {
+  box-shadow: inset 3px 0 0 var(--ac);
+  padding-left: 12px;
+}
+.case .runs + .source {
+  max-width: 72ch;
+  margin-top: 16px;
+}
 @media (max-width: 640px) {
+  .case .runs thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  .case .runs,
+  .case .runs tbody,
+  .case .runs tr,
+  .case .runs th,
+  .case .runs td {
+    display: block;
+  }
+  .case .runs tr {
+    padding-block: 10px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .case .runs th,
+  .case .runs td {
+    padding: 2px 0;
+    border: 0;
+    background: none;
+  }
+  .case .runs [data-final] {
+    padding-inline: 12px;
+    background: color-mix(in oklch, var(--ac) 10%, transparent);
+    box-shadow: inset 3px 0 0 var(--ac);
+  }
+  .case .runs [data-final] td,
+  .case .runs [data-final] th {
+    background: none;
+  }
+  .case .runs [data-final] .when {
+    padding-left: 0;
+    box-shadow: none;
+  }
   .case .ledger > div,
   .case .layers > li {
     grid-template-columns: minmax(0, 1fr);

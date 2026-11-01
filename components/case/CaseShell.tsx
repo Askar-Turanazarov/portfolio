@@ -15,6 +15,11 @@ const labels = {
   built: { en: "What I built", ru: "Что построено", uz: "Nima qurildi" },
   arch: { en: "How it is put together", ru: "Как это устроено", uz: "Qanday tuzilgan" },
   hard: { en: "The hard parts", ru: "Сложные места", uz: "Qiyin joylar" },
+  journey: { en: "How the model was chosen", ru: "Как подбиралась модель", uz: "Model qanday tanlangan" },
+  journeyWhen: { en: "When", ru: "Когда", uz: "Qachon" },
+  journeyWhat: { en: "What I tested", ru: "Что проверял", uz: "Nima tekshirildi" },
+  journeyResult: { en: "Result", ru: "Результат", uz: "Natija" },
+  journeyDecision: { en: "Decision", ru: "Решение", uz: "Qaror" },
   stack: { en: "The stack, and why", ru: "Стек и почему", uz: "Stek va nima uchun" },
   metrics: { en: "Measured", ru: "Что измерено", uz: "O‘lchangan" },
   gallery: { en: "In use", ru: "В работе", uz: "Ishda" },
@@ -87,6 +92,7 @@ export function CaseShell({
     c.gallery?.length ? { id: "gallery", label: pick(labels.gallery, locale) } : null,
     c.arch ? { id: "arch", label: pick(labels.arch, locale) } : null,
     c.hard ? { id: "hard", label: pick(labels.hard, locale) } : null,
+    c.journey ? { id: "journey", label: pick(labels.journey, locale) } : null,
     c.stack ? { id: "stack", label: pick(labels.stack, locale) } : null,
     rest.length ? { id: "measured", label: pick(labels.metrics, locale) } : null,
   ].filter((i) => i !== null);
@@ -258,6 +264,36 @@ export function CaseShell({
                       </article>
                     ))}
                   </div>
+                </div>
+              </section>
+            )}
+
+            {c.journey && (
+              <section className="g case-sec" id="journey">
+                <div className="in">
+                  <h2>{pick(labels.journey, locale)}</h2>
+                  <p>{pick(c.journey.lead, locale)}</p>
+                  <table className="runs">
+                    <thead>
+                      <tr>
+                        <th scope="col">{pick(labels.journeyWhen, locale)}</th>
+                        <th scope="col">{pick(labels.journeyWhat, locale)}</th>
+                        <th scope="col">{pick(labels.journeyResult, locale)}</th>
+                        <th scope="col">{pick(labels.journeyDecision, locale)}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {c.journey.rows.map((r) => (
+                        <tr key={r.what.en} data-final={r.final ? "" : undefined}>
+                          <td className="when">{pick(r.when, locale)}</td>
+                          <th scope="row">{pick(r.what, locale)}</th>
+                          <td className="res">{pick(r.result, locale)}</td>
+                          <td className="dec">{pick(r.decision, locale)}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                  <p className="source">{pick(c.journey.note, locale)}</p>
                 </div>
               </section>
             )}
