@@ -36,6 +36,9 @@ const blocks: Record<string, ComponentType<{ locale: Locale }>> = {
   "first-steps": dynamic(() => import("@/components/case/blocks/FirstToys")),
 };
 
+/** The page reads its params at the top, so it opts out of the instant-navigation check. */
+export const instant = false;
+
 export function generateStaticParams() {
   return locales.flatMap((lang) => caseOrder.map((slug) => ({ lang, slug })));
 }
@@ -73,7 +76,7 @@ export default async function CasePage({ params }: { params: Params }) {
     return { slug: s, name: getProject(s)?.name ?? s };
   };
   const Block = blocks[slug];
-  const anchor = project.featured ? `spread-${slug}` : `row-${slug}`;
+  const anchor = project.featured ? `spread-${slug}` : `row-${slug === "first-steps" ? "first-clicker" : slug}`;
 
   return (
     <>

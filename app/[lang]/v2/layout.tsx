@@ -27,7 +27,9 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
       canonical: `/${locale}/v2`,
       languages: { en: "/en/v2", ru: "/ru/v2", uz: "/uz/v2", "x-default": "/en/v2" },
     },
-    openGraph: { url: `/${locale}/v2` },
+    // Nested openGraph objects replace the parent's whole, the file-based image included.
+    openGraph: { url: `/${locale}/v2`, images: [{ url: `/${locale}/opengraph-image`, width: 1200, height: 630 }] },
+    twitter: { card: "summary_large_image", images: [`/${locale}/opengraph-image`] },
   };
 }
 

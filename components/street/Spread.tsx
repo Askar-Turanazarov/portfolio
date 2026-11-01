@@ -1,10 +1,11 @@
+import Link from "next/link";
 import Image from "next/image";
 import type { CSSProperties } from "react";
 import type { Dictionary } from "@/lib/dictionary";
 import { pick, type Locale } from "@/lib/i18n";
 import type { Project } from "@/lib/schema";
 import { fieldFor } from "@/lib/color";
-import { num, periodLabel } from "@/lib/street/format";
+import { caseHref, num, periodLabel } from "@/lib/street/format";
 
 type Props = {
   dict: Dictionary;
@@ -52,7 +53,7 @@ export function Spread({ dict, locale, project: p, index, figure, side, hasCover
       <div className="txt">
         <h2 id={`h-${p.slug}`}>
           <small>{num(index)}</small>
-          {p.name}
+          <Link href={caseHref(locale, p.slug)}>{p.name}</Link>
         </h2>
         <p className="m">{periodLabel(p.period, dict.street.months, locale)}</p>
         <p>

@@ -140,7 +140,7 @@ const uz: Dictionary = {
     eyebrow: "Men haqimda",
     title: "Askar Turanazarov",
     paragraphs: [
-      "Men Toshkentdan full-stack dasturchiman. 2026 yilda AI-first dasturlash bo‘yicha intensiv kursni o‘tdim va to‘rt oyda yigirmata loyiha chiqardim — har biri backend, ma’lumotlar bazasi, deploy va hujjatlar bilan to‘liq mahsulot.",
+      "Men Toshkentdan full-stack dasturchiman. 2026 yilda AI-first dasturlash bo‘yicha intensiv kursni o‘tdim va to‘rt oyda yigirmadan ortiq loyiha chiqardim — har biri backend, ma’lumotlar bazasi, deploy va hujjatlar bilan to‘liq mahsulot.",
       "Men uchun har qanday kirish nuqtasidan to‘g‘ri qoladigan tizimlar, halol raqamlar va ulardan foydalanadigan odamlar uchun uch tildagi interfeyslar muhim.",
       "Koddan tashqari: aviatsiya, koinot va tabiat.",
     ],
@@ -189,11 +189,21 @@ const uz: Dictionary = {
   },
   street: {
     meta: {
-      title: "Askar Turanazarov — bir ko‘chada yigirma mahsulot",
+      title: "Askar Turanazarov — bir ko‘chada tayyor mahsulotlar",
       description:
-        "Toshkentlik full-stack dasturchi. Haqiqiy biznes uchun yigirma tugallangan AI mahsulot: sayt, Telegram bot, admin panel, AI yordamchi va to‘lov — uch tilda. Har biri 3D ko‘chadagi bino.",
+        "Toshkentlik full-stack dasturchi. Haqiqiy biznes uchun tugallangan AI mahsulotlar: sayt, Telegram bot, admin panel, AI yordamchi va to‘lov — uch tilda. Har biri 3D ko‘chadagi bino.",
+    },
+    growth: {
+      title: "Qanday o‘sdi",
+      lede: "Bu daraxtning har bir yirik shoxi loyiha, men ularni boshlagan tartibda: iyuldagi brauzer klikeridan kuzdagi reys kechikishi modeligacha.",
+      hint: "Pastga aylantiring, daraxt oyma-oy o‘sadi.",
+      alt: "Oqshom yorug‘ida o‘sib bo‘lgan chinor: har bir yirik shox bu loyiha",
+      endTitle: "Hozircha shu yergacha",
+      end: "Daraxt hozircha shu yerda to‘xtaydi. Yuqoridagi har bir loyihaning o‘z sahifasi bor, ko‘pini ochib sinab ko‘rish mumkin.",
+      back: "Ko‘chaga qaytish"
     },
     nav: {
+      growth: "Qanday o‘sdi",
       flagships: "Flagmanlar",
       index: "Yig‘ma",
       github: "GitHub",
@@ -209,14 +219,15 @@ const uz: Dictionary = {
       place: "Toshkent, iyul — oktyabr 2026",
       say: "Ochib, sinab ko‘rish mumkin bo‘lgan tayyor mahsulotlar.",
       lede: "Men haqiqiy biznes jarayonlari uchun tugallangan AI mahsulotlar yig‘aman: sayt, Telegram bot, admin panel, AI yordamchi va to‘lov — uch tilda va O‘zbekiston bozorini hisobga olib.",
-      flagships: "Oltita flagman",
-      caption: "Ko‘cha: yigirma bino — yigirma loyiha.",
-      captionScene: "Binoga kursorni olib boring, keysni ochish uchun bosing.",
-      posterDay: "Kunduzi yigirma loyiha-binodan iborat ko‘cha",
-      posterEvening: "Oqshomda yigirma loyiha-binodan iborat ko‘cha",
-      stage: "3D ko‘cha: yigirma bino, har biri loyihalardan biri",
+      flagships: "Flagmanlar",
+      caption: "Ko‘cha: har bir bino bu loyiha.",
+      captionScene: "Binoga borish uchun ustiga bosing.",
+      nav: { label: "Ko‘cha navigatori", prev: "Oldingi loyiha", next: "Keyingi loyiha", hint: "Strelkalar yoki A / D: qisqa bosish qo‘shni loyihaga olib boradi, ushlab turish ko‘cha bo‘ylab yuradi. Atrofga qarash uchun torting.", page: "Loyiha sahifasi", open: "Saytni ochish", close: "Kartani yopish" },
+      posterDay: "Kunduzi loyiha-binolardan iborat ko‘cha",
+      posterEvening: "Oqshomda loyiha-binolardan iborat ko‘cha",
+      stage: "3D ko‘cha: har bir bino loyihalardan biri",
     },
-    flagships: { title: "Oltita flagman", show: "ko‘chada ko‘rsatish" },
+    flagships: { title: "Flagmanlar", show: "ko‘chada ko‘rsatish" },
     spread: {
       problem: "Vazifa.",
       solution: "Nima qildim.",
@@ -229,11 +240,11 @@ const uz: Dictionary = {
     },
     index: {
       title: "Yig‘ma",
-      lede: "Barcha yigirma mahsulot o‘nta moduldan yig‘ilgan. Modul qayerda turganini ko‘rish uchun unga kursorni olib boring; loyihaning retseptini yig‘ish uchun loyihaga olib boring.",
+      lede: "Barcha mahsulotlar o‘nta moduldan yig‘ilgan. Modul qayerda turganini ko‘rish uchun unga kursorni olib boring; loyihaning retseptini yig‘ish uchun loyihaga olib boring.",
       all: "O‘nta modul",
       project: "Loyiha",
       when: "Qachon",
-      total: "Yigirmadan",
+      total: "Jami",
     },
     colophon: {
       note: "Barcha loyihalar o‘quv va konseptual: peshtaxtalardagi kompaniyalar to‘qima, kod va demo haqiqiy.",

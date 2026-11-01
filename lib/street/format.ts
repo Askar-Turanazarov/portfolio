@@ -14,3 +14,9 @@ export function periodLabel(period: Project["period"], months: readonly string[]
 export function num(i: number): string {
   return String(i + 1).padStart(2, "0");
 }
+
+/** A project's page. The clicker and the ball share one. */
+export function caseHref(locale: string, slug: string): string {
+  const page = slug === "first-clicker" || slug === "magic-8-ball" ? "first-steps" : slug;
+  return `/${locale}/projects/${page}`;
+}

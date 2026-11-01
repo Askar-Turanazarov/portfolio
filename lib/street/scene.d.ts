@@ -17,6 +17,12 @@ export type SceneOptions = {
   texturePath?: string;
   onHover?: ((slug: string | null, point: LabelPoint | null, building: SceneBuilding | null) => void) | null;
   onPick?: ((slug: string, building: SceneBuilding) => void) | null;
+  /** The building the camera is at or heading to has changed. */
+  onCurrent?: ((slug: string, building: SceneBuilding) => void) | null;
+  /** A travel has started. */
+  onDepart?: ((slug: string, building: SceneBuilding) => void) | null;
+  /** A travel has ended; the point is where the building's sign stands on screen. */
+  onArrive?: ((slug: string, point: LabelPoint, building: SceneBuilding) => void) | null;
   /** The governor changed the quality level. */
   onQuality?: ((level: Quality, gpu: GpuInfo) => void) | null;
   /** Mount the diagnostic overlay (renderer, level, frame times, draw calls). */
@@ -67,6 +73,10 @@ export type SceneHandle = {
   setTime(name: TimeName, instant?: boolean): void;
   getTime(): TimeName;
   flyTo(slug: string): void;
+  step(dir: 1 | -1): void;
+  hold(dir: 1 | -1 | 0): void;
+  setGlass(rect: { x: number; y: number; w: number; h: number } | null): boolean;
+  release(): void;
   highlight(slug: string | null): void;
   setView(view: { x?: number; phase?: number; az?: number; height?: number }): void;
   pause(paused: boolean): void;

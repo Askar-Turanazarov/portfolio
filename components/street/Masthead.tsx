@@ -16,6 +16,7 @@ export function Masthead({ dict, locale, anchorBase = "", langPath = "" }: { dic
         <nav aria-label={t.sections}>
           <a className="hide-xs" href={`${anchorBase}#flagships`}>{t.flagships}</a>
           <a className="hide-xs" href={`${anchorBase}#index`}>{t.index}</a>
+          <a className="hide-sm hide-md" href={`/${locale}/growth`}>{t.growth}</a>
           <a className="hide-sm hide-md" href={site.github} target="_blank" rel="noopener noreferrer">
             {t.github}
           </a>

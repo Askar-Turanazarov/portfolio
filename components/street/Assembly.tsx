@@ -1,12 +1,13 @@
 import type { CSSProperties } from "react";
+import Link from "next/link";
 import type { Dictionary } from "@/lib/dictionary";
 import { pick, type Locale } from "@/lib/i18n";
 import type { Project } from "@/lib/schema";
 import { modules } from "@/content/modules";
-import { periodLabel } from "@/lib/street/format";
+import { caseHref, periodLabel } from "@/lib/street/format";
 
 /**
- * «Сборка»: ten modules × twenty products. The recipe line above the board is filled by
+ * «Сборка»: ten modules × every product. The recipe line above the board is filled by
  * Interactions when a row is hovered; the board itself is a plain table, readable without JS.
  */
 export function Assembly({ dict, locale, rows }: { dict: Dictionary; locale: Locale; rows: Project[] }) {
@@ -57,9 +58,7 @@ export function Assembly({ dict, locale, rows }: { dict: Dictionary; locale: Loc
                 style={{ "--acc": p.accent } as CSSProperties}
               >
                 <th scope="row">
-                  <a href={p.links.live ?? p.links.repo} target="_blank" rel="noopener noreferrer">
-                    {p.name}
-                  </a>
+                  <Link href={caseHref(locale, p.slug)}>{p.name}</Link>
                 </th>
                 <td className="m">{periodLabel(p.period, dict.street.months, locale)}</td>
                 {modules.map((m, i) =>

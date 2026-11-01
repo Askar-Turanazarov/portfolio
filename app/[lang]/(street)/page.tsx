@@ -12,8 +12,8 @@ import { Colophon } from "@/components/street/Colophon";
 import { Interactions } from "@/components/street/Interactions";
 
 /**
- * Home: the street. Hero with the live scene, the six flagships as a table of contents and as
- * spreads on their own colour fields, the «Assembly» board of all twenty, the colophon.
+ * Home: the street. Hero with the live scene, the flagships as a table of contents and as
+ * spreads on their own colour fields, the «Assembly» board of all projects, the colophon.
  */
 export default async function HomePage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
@@ -38,7 +38,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
       {spreads.map(({ p, i, has, figure, side }) => (
         <Spread key={p.slug} dict={dict} locale={lang} project={p} index={i} figure={figure} side={side} hasCover={has} />
       ))}
-      <Assembly dict={dict} locale={lang} rows={[...ordered].reverse()} />
+      <Assembly dict={dict} locale={lang} rows={ordered} />
       <Colophon dict={dict} />
       <Interactions />
     </main>

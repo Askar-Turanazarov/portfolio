@@ -37,8 +37,12 @@ const raw: ProjectInput[] = [
     links: { live: "https://flight-delay-askar.streamlit.app", repo: `${GH}/FlightDelay-Service` },
     status: "live-cold",
     accent: "#ff6b6b",
-    // Not in the grid until it has a building on the street.
-    inGrid: false,
+    featured: true,
+    essence: {
+      en: "a flight delay forecast before departure, with the reasons and the cost",
+      ru: "прогноз задержки рейса до вылета, с причинами и стоимостью",
+      uz: "uchishdan oldin reys kechikishi prognozi, sabablari va narxi bilan",
+    },
     period: { from: "2026-10", to: "2026-11" },
   },
   {

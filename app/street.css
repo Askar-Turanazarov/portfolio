@@ -216,10 +216,14 @@ html:has(.street) body {
   flex-wrap: wrap;
   font-size: 16px;
 }
-.street .scene {
+.street .scene-wrap {
   grid-column: 7 / 15;
   position: relative;
   min-height: 460px;
+}
+.street .scene {
+  position: absolute;
+  inset: 0;
   -webkit-mask-image: linear-gradient(to right, transparent, #000 20%), linear-gradient(to top, transparent, #000 24%);
   -webkit-mask-composite: source-in;
   mask-image: linear-gradient(to right, transparent, #000 20%), linear-gradient(to top, transparent, #000 24%);
@@ -310,8 +314,133 @@ html:has(.street) body {
   line-height: 1.35;
   color: var(--ink-2);
 }
+/* over the live scene the navigator says it all */
+.street .hero[data-mode="scene"] .cap {
+  display: none;
+}
 .street .hero:not([data-mode="scene"]) .cap .only-scene {
   display: none;
+}
+
+/* the navigator and the card stand over the masked scene */
+.street .st-nav {
+  position: absolute;
+  left: 22%;
+  right: var(--gutter-r);
+  bottom: 40px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+.street .st-nav button {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  font: inherit;
+  font-size: 18px;
+  color: var(--ink);
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--rule-strong);
+  cursor: pointer;
+}
+.street .st-nav button:hover {
+  border-color: var(--ink);
+}
+.street .st-now {
+  min-width: 0;
+  padding: 9px 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid var(--acc, var(--garnet));
+}
+.street .st-now span {
+  margin-left: 8px;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+.street .st-card {
+  position: absolute;
+  right: var(--gutter-r);
+  bottom: 92px;
+  z-index: 4;
+  width: min(380px, calc(100% - 2 * 16px));
+  padding: 18px 20px 16px;
+  display: grid;
+  gap: 8px;
+  transform-origin: 0 0;
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(18px) saturate(1.5);
+  backdrop-filter: blur(18px) saturate(1.5);
+  border: 1px solid var(--glass-edge);
+  border-top: 2px solid var(--acc, var(--garnet));
+  box-shadow: 0 18px 50px oklch(0 0 0 / 0.22);
+}
+/* the scene draws the glass under the card itself */
+.street .st-card[data-glass] {
+  background: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  border-color: transparent;
+  border-top-color: var(--acc, var(--garnet));
+}
+.street .st-card h2 {
+  margin: 0;
+  padding-right: 32px;
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1.15;
+}
+.street .st-card p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.4;
+}
+.street .st-card ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 15px;
+}
+.street .st-card a {
+  color: var(--garnet);
+}
+.street .st-card .x {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  font: inherit;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--ink);
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+@media (max-width: 767px) {
+  .street .st-nav {
+    left: var(--gutter-r);
+    bottom: 14px;
+  }
+  .street .st-card {
+    left: 16px;
+    right: 16px;
+    bottom: 66px;
+    width: auto;
+  }
 }
 
 /* not found */
@@ -722,7 +851,7 @@ html:has(.street) body {
   .street .hero .text {
     grid-column: 2 / 8;
   }
-  .street .scene {
+  .street .scene-wrap {
     grid-column: 8 / 15;
   }
   .street .spread.odd figure {
@@ -786,11 +915,13 @@ html:has(.street) body {
     min-height: 0;
     grid-template-rows: auto auto;
   }
-  .street .scene {
+  .street .scene-wrap {
     grid-row: 1;
     grid-column: 1 / -1;
     min-height: 0;
     height: 58svh;
+  }
+  .street .scene {
     -webkit-mask-image: linear-gradient(to top, transparent, #000 14%);
     -webkit-mask-composite: source-over;
     mask-image: linear-gradient(to top, transparent, #000 14%);
@@ -914,5 +1045,123 @@ html:has(.street) body {
   }
   .street .colo .in {
     grid-template-columns: 1fr;
+  }
+}
+
+/* the growth page: a tree behind the text, the scroll is its age */
+.growth {
+  position: relative;
+}
+.gr-stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  margin-bottom: -100svh;
+  overflow: hidden;
+  background: var(--sunken);
+}
+.gr-poster img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.gr-canvas {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.6s;
+}
+.gr-canvas[data-state="live"] {
+  opacity: 1;
+}
+.gr-canvas canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.gr-labels a {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 3px 8px;
+  font-size: 14px;
+  color: var(--ink);
+  white-space: nowrap;
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s;
+}
+.gr-text {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 62svh;
+  padding: 18svh var(--gutter-r) 40svh var(--gutter);
+  pointer-events: none;
+}
+.gr-panel {
+  width: min(480px, 100%);
+  padding: 24px 26px;
+  pointer-events: auto;
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  backdrop-filter: blur(16px) saturate(1.4);
+  border: 1px solid var(--glass-edge);
+}
+.gr-panel h1,
+.gr-panel h2 {
+  margin: 0 0 12px;
+  font-family: var(--serif);
+  font-weight: 400;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+.gr-panel h1 {
+  font-size: clamp(44px, 5vw, 68px);
+}
+.gr-panel h2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 32px;
+}
+.gr-panel h2 span {
+  font-size: 18px;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+.gr-panel p {
+  margin: 0;
+  line-height: 1.45;
+}
+.gr-panel > p + p {
+  margin-top: 12px;
+}
+.gr-hint {
+  color: var(--ink-2);
+}
+.gr-panel a {
+  color: var(--garnet);
+}
+.gr-panel ol {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.gr-panel li p {
+  font-size: 15px;
+  color: var(--ink-2);
+}
+@media (max-width: 767px) {
+  .gr-text {
+    gap: 42svh;
+    padding-top: 44svh;
   }
 }

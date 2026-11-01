@@ -140,7 +140,7 @@ const en = {
     eyebrow: "About",
     title: "Askar Turanazarov",
     paragraphs: [
-      "I am a full-stack developer from Tashkent. In 2026 I went through an intensive AI-first development course and shipped twenty projects in four months — each one a complete product with a backend, a database, a deployment and documentation.",
+      "I am a full-stack developer from Tashkent. In 2026 I went through an intensive AI-first development course and shipped more than twenty projects in four months — each one a complete product with a backend, a database, a deployment and documentation.",
       "I care about systems that stay correct from every entry point, about honest numbers, and about interfaces that work in three languages for the people who will actually use them.",
       "Outside of code: aviation, space and nature.",
     ],
@@ -189,11 +189,21 @@ const en = {
   },
   street: {
     meta: {
-      title: "Askar Turanazarov — twenty products on one street",
+      title: "Askar Turanazarov — finished products on one street",
       description:
-        "Full-stack developer in Tashkent. Twenty complete AI products for real businesses: site, Telegram bot, admin panel, AI assistant and payments, in three languages. Each one is a building on a 3D street.",
+        "Full-stack developer in Tashkent. Complete AI products for real businesses: site, Telegram bot, admin panel, AI assistant and payments, in three languages. Each one is a building on a 3D street.",
+    },
+    growth: {
+      title: "How it grew",
+      lede: "Every limb of this tree is a project, in the order I started them: from a browser clicker in July to a flight delay model in the autumn.",
+      hint: "Scroll down and the tree grows, month by month.",
+      alt: "A grown plane tree in the evening light: every limb is a project",
+      endTitle: "That is where it stands",
+      end: "The tree stops here for now. Each project above has its own page, and most of them can be opened and tried.",
+      back: "Back to the street"
     },
     nav: {
+      growth: "How it grew",
       flagships: "Flagships",
       index: "Assembly",
       github: "GitHub",
@@ -209,14 +219,15 @@ const en = {
       place: "Tashkent, July – October 2026",
       say: "Finished products you can open and try.",
       lede: "I build complete AI products for real business processes: a site, a Telegram bot, an admin panel, an AI assistant and payments, in three languages and tuned to the Uzbek market.",
-      flagships: "Six flagships",
-      caption: "The street: twenty buildings, twenty projects.",
-      captionScene: "Hover a building to name it, click to open the case.",
-      posterDay: "A street of twenty project buildings by day",
-      posterEvening: "A street of twenty project buildings in the evening",
-      stage: "3D street: twenty buildings, each one of the projects",
+      flagships: "Flagships",
+      caption: "The street: every building is a project.",
+      captionScene: "Click a building to travel to it.",
+      nav: { label: "Street navigator", prev: "Previous project", next: "Next project", hint: "Arrows or A / D: a tap goes to the next project, holding walks. Drag to look around.", page: "Project page", open: "Open the site", close: "Close the card" },
+      posterDay: "A street of project buildings by day",
+      posterEvening: "A street of project buildings in the evening",
+      stage: "3D street: every building is one of the projects",
     },
-    flagships: { title: "Six flagships", show: "show on the street" },
+    flagships: { title: "Flagships", show: "show on the street" },
     spread: {
       problem: "Problem.",
       solution: "What I built.",
@@ -229,11 +240,11 @@ const en = {
     },
     index: {
       title: "Assembly",
-      lede: "All twenty products are assembled from ten modules. Hover a module to see where it stands; hover a project to assemble its recipe.",
+      lede: "All the products are assembled from ten modules. Hover a module to see where it stands; hover a project to assemble its recipe.",
       all: "Ten modules",
       project: "Project",
       when: "When",
-      total: "Out of twenty",
+      total: "In total",
     },
     colophon: {
       note: "All projects are study and concept work: the companies on the signs are fictional, the code and the demos are real.",

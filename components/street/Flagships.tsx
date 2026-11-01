@@ -3,7 +3,7 @@ import { pick, type Locale } from "@/lib/i18n";
 import type { Project } from "@/lib/schema";
 import { num, periodLabel } from "@/lib/street/format";
 
-/** Table of contents for the six flagships: number, name, month, one line of essence. Hover names a building on the street. */
+/** Table of contents for the flagships: number, name, month, one line of essence. Hover names a building on the street. */
 export function Flagships({
   dict,
   locale,
