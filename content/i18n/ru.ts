@@ -162,6 +162,7 @@ const ru: Dictionary = {
     rights: "Все права защищены.",
   },
   common: {
+    portfolioSite: "Сайт-портфолио",
     themeToggle: "Переключить тему",
     openInNewTab: "откроется в новой вкладке",
     status: {

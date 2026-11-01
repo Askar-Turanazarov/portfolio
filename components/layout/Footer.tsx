@@ -10,6 +10,7 @@ export function Footer({ dict }: { dict: Dictionary }) {
       <Container className="flex flex-col gap-6 text-sm text-fg-muted sm:flex-row sm:items-center sm:justify-between">
         <div className="space-y-1">
           <p className="font-display font-semibold text-fg">{site.name}</p>
+          <p className="text-xs">{dict.common.portfolioSite}</p>
           <p>
             © {year}. {dict.footer.rights}
           </p>

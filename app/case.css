@@ -1109,10 +1109,17 @@
   border-color: var(--ink);
 }
 .street .pbar-name {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   color: var(--ink-2);
   font-size: 15px;
+  line-height: 1.2;
   white-space: nowrap;
   text-decoration: none;
+}
+.street .pbar-name small {
+  font-size: 12px;
 }
 .pbar-side {
   justify-self: end;

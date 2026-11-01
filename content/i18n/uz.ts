@@ -162,6 +162,7 @@ const uz: Dictionary = {
     rights: "Barcha huquqlar himoyalangan.",
   },
   common: {
+    portfolioSite: "Portfolio sayti",
     themeToggle: "Mavzuni almashtirish",
     openInNewTab: "yangi oynada ochiladi",
     status: {

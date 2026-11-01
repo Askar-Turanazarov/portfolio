@@ -124,10 +124,18 @@ html:has(.street) body {
   height: 60px;
 }
 .street .mast .name {
+  display: flex;
+  flex-direction: column;
   font-weight: 600;
+  line-height: 1.2;
   color: var(--ink);
   text-decoration: none;
   white-space: nowrap;
+}
+.street .mast .name small {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--ink-2);
 }
 .street .mast nav {
   display: flex;
@@ -899,6 +907,9 @@ html:has(.street) body {
 .street .colo b {
   color: var(--ink);
   font-weight: 500;
+}
+.street .colo .kind {
+  font-size: 12px;
 }
 
 /* theme transition: a circle from the toggle */

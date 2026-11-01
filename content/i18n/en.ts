@@ -162,6 +162,7 @@ const en = {
     rights: "All rights reserved.",
   },
   common: {
+    portfolioSite: "Portfolio site",
     themeToggle: "Toggle theme",
     openInNewTab: "opens in a new tab",
     status: {

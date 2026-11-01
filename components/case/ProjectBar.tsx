@@ -33,6 +33,7 @@ export function ProjectBar({
         </Link>
         <Link className="pbar-name" href={`/${locale}`}>
           {site.name}
+          <small>{dict.common.portfolioSite}</small>
         </Link>
         <div className="pbar-side">
           <span className="pbar-at">

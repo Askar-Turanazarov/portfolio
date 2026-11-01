@@ -12,6 +12,7 @@ export function Masthead({ dict, locale, anchorBase = "", langPath = "" }: { dic
       <div className="in">
         <a className="name" href={`/${locale}`}>
           {site.name}
+          <small>{dict.common.portfolioSite}</small>
         </a>
         <nav aria-label={t.sections}>
           <a className="hide-xs" href={`${anchorBase}#flagships`}>{t.flagships}</a>

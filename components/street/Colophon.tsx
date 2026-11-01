@@ -11,6 +11,7 @@ export function Colophon({ dict }: { dict: Dictionary }) {
           <p>
             <b>{site.name}</b>, {city}
           </p>
+          <p className="kind">{dict.common.portfolioSite}</p>
           <p>
             <a href={site.github} target="_blank" rel="noopener noreferrer">
               github.com/{site.githubHandle}

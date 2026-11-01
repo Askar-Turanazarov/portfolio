@@ -21,11 +21,14 @@ export function Header({ dict, locale }: { dict: Dictionary; locale: Locale }) {
   return (
     <header className="sticky top-0 z-40 border-b border-border/70 bg-bg/80 backdrop-blur-md">
       <Container className="flex h-16 items-center justify-between gap-4">
-        <Link href={`/${locale}/v2`} className="flex items-center gap-3" aria-label={site.name}>
+        <Link href={`/${locale}/v2`} className="flex items-center gap-3" aria-label={`${site.name}, ${dict.common.portfolioSite}`}>
           <span className="grid size-9 place-items-center rounded-md bg-fg font-display text-sm font-bold tracking-tight text-bg">
             {site.monogram}
           </span>
-          <span className="hidden font-display text-sm font-semibold tracking-tight text-fg sm:block">{site.name}</span>
+          <span className="hidden flex-col sm:flex">
+            <span className="font-display text-sm font-semibold leading-tight tracking-tight text-fg">{site.name}</span>
+            <span className="text-xs leading-tight text-fg-muted">{dict.common.portfolioSite}</span>
+          </span>
         </Link>
 
         <nav aria-label="Main" className="hidden items-center gap-1 lg:flex">
