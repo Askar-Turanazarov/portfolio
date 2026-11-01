@@ -36,6 +36,11 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
       <Hero dict={dict} locale={lang} />
       <Flagships dict={dict} locale={lang} flagships={flagships} />
       <div className="spreads">
+      <div className="depth-sky" aria-hidden="true">
+        <i className="far" />
+        <i className="mid" />
+        <i className="near" />
+      </div>
       {spreads.map(({ p, i, has, figure, side }) => (
         <Spread key={p.slug} dict={dict} locale={lang} project={p} index={i} figure={figure} side={side} hasCover={has} />
       ))}

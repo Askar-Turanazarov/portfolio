@@ -18,6 +18,9 @@
   --asleep: oklch(0.45 0.09 235);
   --glass: oklch(0.95 0.006 245 / 0.62);
   --glow-a: 0.32;
+  --sky-far: url(/street/sky-far-day.svg);
+  --sky-mid: url(/street/sky-mid-day.svg);
+  --sky-near: url(/street/sky-near-day.svg);
   --glass-edge: oklch(0 0 0 / 0.06);
   --show-day: block;
   --show-eve: none;
@@ -41,6 +44,9 @@
   --asleep: oklch(0.8 0.08 235);
   --glass: oklch(0.2 0.008 255 / 0.55);
   --glow-a: 0.3;
+  --sky-far: url(/street/sky-far-eve.svg);
+  --sky-mid: url(/street/sky-mid-eve.svg);
+  --sky-near: url(/street/sky-near-eve.svg);
   --glass-edge: oklch(1 0 0 / 0.08);
   --show-day: none;
   --show-eve: block;
@@ -649,19 +655,56 @@ html:has(.street) body {
   margin: 0;
   min-width: 0;
 }
-/* glow.webp holds the frame plus margins of 13% and 18% of its own size: this places it exactly around the 16:10 shot */
-.street .spread figure::before {
+/* The sky behind all spreads: one screen held in place, with three tiled layers sliding through it at their own speeds. */
+.street .depth-sky {
+  position: sticky;
+  top: 0;
+  z-index: 0;
+  height: 100svh;
+  margin-bottom: -100svh;
+  overflow: hidden;
+  pointer-events: none;
+}
+.street .depth-sky i {
+  position: absolute;
+  inset: 0 0 auto;
+  height: calc(100svh + var(--travel));
+  background: var(--tile);
+}
+.street .depth-sky .far {
+  --travel: 100svh;
+  --tile: var(--sky-far);
+}
+.street .depth-sky .mid {
+  --travel: 220svh;
+  --tile: var(--sky-mid);
+}
+.street .depth-sky .near {
+  --travel: 400svh;
+  --tile: var(--sky-near);
+}
+/* glow.webp holds the frame plus margins of 13% and 18% of its own size: this places it exactly around the 16:10 shot
+   when the spread is centred. It lives in the figure's grid area, under every figure, so it can drift past its neighbours. */
+.street .spread.odd::before,
+.street .spread.even::before {
   content: "";
   position: absolute;
-  top: 0;
+  z-index: 0;
+  grid-row: 1;
+  top: 50%;
   left: -17.57%;
   width: 135.14%;
   aspect-ratio: 1.384;
-  translate: 0 -18%;
-  z-index: -1;
+  translate: 0 -50%;
   background: var(--glow) center / 100% 100% no-repeat;
   opacity: var(--glow-a);
   pointer-events: none;
+}
+.street .spread.odd::before {
+  grid-column: 1 / 10;
+}
+.street .spread.even::before {
+  grid-column: 6 / 15;
 }
 /* Depth behind each spread. The numeral is in the grid area of the text, whose column it shares. */
 .street .depth-num {
@@ -691,20 +734,32 @@ html:has(.street) body {
    without it, and readers who asked for less motion, get the same layers standing still. */
 @media (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: view()) {
+    .street .spreads {
+      view-timeline: --sky block;
+    }
+    .street .depth-sky i {
+      --from: 0px;
+      --to: calc(var(--travel) * -1);
+      animation: depth linear both;
+      animation-timeline: --sky;
+      will-change: transform;
+    }
     .street .spread {
-      --far: clamp(90px, 15svh, 170px);
-      --mid: clamp(60px, 10svh, 110px);
-      --near: clamp(10px, 2.5svh, 26px);
+      --far: clamp(200px, 40svh, 400px);
+      --mid: clamp(120px, 24svh, 240px);
+      --near: clamp(24px, 5svh, 48px);
       view-timeline: --spread block;
     }
-    .street .spread figure::before,
+    .street .spread.odd::before,
+    .street .spread.even::before,
     .street .depth-num,
     .street .spread figure {
       animation: depth linear both;
       animation-timeline: --spread;
       will-change: transform;
     }
-    .street .spread figure::before {
+    .street .spread.odd::before,
+    .street .spread.even::before {
       --from: calc(var(--far) * -1);
       --to: var(--far);
     }
@@ -1138,6 +1193,20 @@ html:has(.street) body {
   .street .spread figure,
   .street .spread .txt {
     grid-row: auto;
+  }
+  .street .depth-sky .far {
+    --travel: 200svh;
+  }
+  .street .depth-sky .mid {
+    --travel: 500svh;
+  }
+  .street .depth-sky .near {
+    --travel: 900svh;
+  }
+  /* the figure leads on a phone: its light stays in the first row, the full width of the screen */
+  .street .spread.odd::before,
+  .street .spread.even::before {
+    grid-column: 1 / -1;
   }
   .street .spread.odd figure,
   .street .spread.even figure {
