@@ -3,9 +3,9 @@ import type { CaseContent } from "./types";
 export const flightdelay: CaseContent = {
   slug: "flightdelay",
   kind: {
-    en: "ML service",
-    ru: "ML-сервис",
-    uz: "ML xizmat",
+    en: "Data Science & ML service",
+    ru: "Data Science и ML-сервис",
+    uz: "Data Science va ML xizmat",
   },
   title: {
     en: "Pre-departure delay risk for a flight, with the reasons and the cost.",
@@ -39,9 +39,9 @@ export const flightdelay: CaseContent = {
       uz: "FlightDelay xizmati tanlangan reys uchun kechikish ehtimolini ko‘rsatmoqda.",
     },
     caption: {
-      en: "The forecast. The probability is compared with the average delay rate of 18.9%.",
-      ru: "Прогноз. Вероятность сравнивается со средней долей задержек, 18,9%.",
-      uz: "Prognoz. Ehtimol o‘rtacha kechikish ulushi, ya’ni 18,9% bilan solishtiriladi.",
+      en: "The forecast. The probability is compared with the share of delays in the data, 18.9%.",
+      ru: "Прогноз. Вероятность сравнивается с долей задержек в данных, 18,9%.",
+      uz: "Prognoz. Ehtimol ma’lumotlardagi kechikish ulushi, ya’ni 18,9% bilan solishtiriladi.",
     },
   },
   built: [
@@ -128,17 +128,17 @@ export const flightdelay: CaseContent = {
     {
       tech: "CatBoost",
       why: {
-        en: "Airports, routes and carriers are categories with thousands of values, which it handles natively.",
-        ru: "Аэропорты, маршруты и перевозчики это категории с тысячами значений, а он работает с ними напрямую.",
-        uz: "Aeroport, yo‘nalish va aviakompaniyalar minglab qiymatli kategoriyalar, u ular bilan bevosita ishlaydi.",
+        en: "Whether a flight runs late depends on combinations: hour, airport, route, carrier and traffic act together, and not in a straight line. Gradient boosting suits such complex non-linear, multi-dimensional dependencies: each new tree corrects the errors of the ones before it. CatBoost also takes categories with thousands of values directly (about 4,200 routes alone) and builds their combinations itself. These combinations carry real signal: when my experiments with the compact model forbade them, AUC fell from 0.786 to 0.733–0.751.",
+        ru: "Опоздает ли рейс, зависит от сочетаний: час, аэропорт, маршрут, перевозчик и загрузка действуют вместе и не по прямой. Градиентный бустинг подходит для таких сложных нелинейных многомерных зависимостей: каждое новое дерево исправляет ошибки предыдущих. CatBoost к тому же принимает категории с тысячами значений напрямую (одних маршрутов около 4200) и сам строит их сочетания. В этих сочетаниях есть настоящий сигнал: когда в экспериментах с компактной моделью я их запрещал, AUC падал с 0,786 до 0,733–0,751.",
+        uz: "Reys kechikishi birikmalarga bog‘liq: soat, aeroport, yo‘nalish, aviakompaniya va yuklama birgalikda va to‘g‘ri chiziq bo‘yicha emas, ta’sir qiladi. Gradient boosting shunday murakkab nochiziqli ko‘p o‘lchovli bog‘liqliklarga mos keladi: har bir yangi daraxt oldingilarining xatolarini tuzatadi. CatBoost minglab qiymatli kategoriyalarni ham bevosita qabul qiladi (faqat yo‘nalishlar 4200 ga yaqin) va ularning birikmalarini o‘zi quradi. Bu birikmalarda haqiqiy signal bor: ixcham model tajribalarida ularni taqiqlaganimda AUC 0,786 dan 0,733–0,751 gacha tushdi.",
       },
     },
     {
       tech: "scikit-learn Pipeline",
       why: {
-        en: "The same feature code runs at training and at inference.",
-        ru: "Один и тот же код признаков работает и при обучении, и при прогнозе.",
-        uz: "Bir xil belgilar kodi o‘qitishda ham, prognozda ham ishlaydi.",
+        en: "The first step is my own FlightFeatureEngineer transformer, the second is CatBoost. Traffic statistics are computed in fit, on the training split only, which closes off leakage from the test set. The whole pipeline is saved as one file, so the app builds features with the same code as training and the two cannot drift apart. Switching to the compact model means swapping that file.",
+        ru: "Первый шаг это мой трансформер FlightFeatureEngineer, второй это CatBoost. Статистика загрузки считается в fit только на обучающей части, что закрывает утечку из тестовой. Весь конвейер сохраняется одним файлом, поэтому приложение строит признаки тем же кодом, что и обучение, и разойтись с ним не может. Перейти на компактную модель значит заменить этот файл.",
+        uz: "Birinchi qadam mening FlightFeatureEngineer transformerim, ikkinchisi CatBoost. Yuklama statistikasi fit ichida faqat o‘quv qismida hisoblanadi, bu test qismidan sizib chiqishni yopadi. Butun konveyer bitta faylda saqlanadi, shuning uchun ilova belgilarni o‘qitishdagi kod bilan quradi va undan farq qila olmaydi. Ixcham modelga o‘tish shu faylni almashtirishdir.",
       },
     },
     {
@@ -157,18 +157,36 @@ export const flightdelay: CaseContent = {
       note: { en: "Compact model in the demo: 0.779.", ru: "Компактная модель в демо: 0,779.", uz: "Demodagi ixcham model: 0,779." },
     },
     {
-      label: { en: "Test set", ru: "Тестовая выборка", uz: "Test to‘plami" },
-      value: "408 907",
+      label: { en: "All flights used", ru: "Всего рейсов в работе", uz: "Ishlatilgan barcha reyslar" },
+      value: "2 044 533",
       note: {
-        en: "20% of the first 2.1 million of 5.8 million US flights of 2015.",
-        ru: "20% от первых 2,1 млн из 5,8 млн рейсов США за 2015 год.",
-        uz: "2015-yilgi AQShning 5,8 mln reysidan dastlabki 2,1 mln ning 20%.",
+        en: "The first 2.1 million rows of 5.8 million US flights of 2015 (January to mid-May), without cancelled and diverted flights.",
+        ru: "Первые 2,1 млн строк из 5,8 млн рейсов США за 2015 год (январь — середина мая), без отменённых и перенаправленных.",
+        uz: "2015-yilgi AQShning 5,8 mln reysidan dastlabki 2,1 mln qator (yanvar — may o‘rtasi), bekor qilingan va yo‘nalishi o‘zgartirilganlarsiz.",
       },
     },
     {
-      label: { en: "Delayed flights", ru: "Доля задержек", uz: "Kechikkan reyslar" },
+      label: { en: "Delays in the data", ru: "Доля задержек в данных", uz: "Ma’lumotlardagi kechikish ulushi" },
       value: "18.9%",
-      note: { en: "Arrival more than 15 minutes late.", ru: "Прибытие с опозданием больше 15 минут.", uz: "15 daqiqadan ko‘p kechikib kelish." },
+      note: {
+        en: "A statistic of the data itself, not a decision of the model: arrival more than 15 minutes late. Across all of 2015: 17.9%.",
+        ru: "Статистика самих данных, а не решение модели: прибытие с опозданием больше 15 минут. За весь 2015 год: 17,9%.",
+        uz: "Modelning qarori emas, ma’lumotlarning o‘z statistikasi: 15 daqiqadan ko‘p kechikib kelish. Butun 2015-yil bo‘yicha: 17,9%.",
+      },
+    },
+    {
+      label: { en: "Training set", ru: "Обучающая выборка", uz: "O‘quv to‘plami" },
+      value: "1 635 626",
+      note: { en: "80% of the flights. The model learned on these.", ru: "80% рейсов. На них модель училась.", uz: "Reyslarning 80%. Model ularda o‘qigan." },
+    },
+    {
+      label: { en: "Test set", ru: "Тестовая выборка", uz: "Test to‘plami" },
+      value: "408 907",
+      note: {
+        en: "20% of the flights. The model never saw these in training. The split keeps the share of delays the same in both parts.",
+        ru: "20% рейсов. При обучении модель их не видела. Разбиение сохраняет долю задержек одинаковой в обеих частях.",
+        uz: "Reyslarning 20%. O‘qitishda model ularni ko‘rmagan. Bo‘linish ikkala qismda kechikish ulushini bir xil saqlaydi.",
+      },
     },
     {
       label: { en: "Training", ru: "Обучение", uz: "O‘qitish" },
@@ -177,8 +195,8 @@ export const flightdelay: CaseContent = {
     },
   ],
   metricsSource: {
-    en: "From reports/metrics in the repository. The threshold table is for the full model.",
-    ru: "Из reports/metrics в репозитории. Таблица порогов относится к полной модели.",
-    uz: "Repozitoriydagi reports/metrics dan. Chegaralar jadvali to‘liq modelga tegishli.",
+    en: "Model figures are from reports/metrics in the repository, flight counts and delay shares are counted from the source flights.csv. The threshold table is for the full model.",
+    ru: "Показатели модели из reports/metrics в репозитории, число рейсов и доли задержек посчитаны по исходному flights.csv. Таблица порогов относится к полной модели.",
+    uz: "Model ko‘rsatkichlari repozitoriydagi reports/metrics dan, reyslar soni va kechikish ulushlari asl flights.csv bo‘yicha hisoblangan. Chegaralar jadvali to‘liq modelga tegishli.",
   },
 };

@@ -21,6 +21,7 @@ const labels = {
   back: { en: "Back to the street", ru: "Назад на улицу", uz: "Ko‘chaga qaytish" },
   next: { en: "Next project", ru: "Следующий проект", uz: "Keyingi loyiha" },
   prev: { en: "Previous project", ru: "Предыдущий проект", uz: "Oldingi loyiha" },
+  others: { en: "Other projects", ru: "Другие проекты", uz: "Boshqa loyihalar" },
   contents: { en: "On this page", ru: "На этой странице", uz: "Shu sahifada" },
   featured: { en: "Flagship", ru: "Флагман", uz: "Flagman" },
   openSite: { en: "Open the {name} site", ru: "Открыть сайт {name}", uz: "{name} saytini ochish" },
@@ -300,8 +301,9 @@ export function CaseShell({
         </div>
       </div>
 
-      <nav className="g cs-near" aria-label={pick(labels.next, locale)}>
+      <nav className="g cs-near" aria-labelledby="cs-near-title">
         <div className="in">
+          <h2 id="cs-near-title">{pick(labels.others, locale)}</h2>
           <Door n={prev} locale={locale} label={pick(labels.prev, locale)} rel="prev" />
           <Door n={next} locale={locale} label={pick(labels.next, locale)} rel="next" />
           <p className="cs-home">

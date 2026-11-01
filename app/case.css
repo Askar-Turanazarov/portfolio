@@ -1326,14 +1326,21 @@
 }
 
 .cs-near {
-  padding-block: 72px 24px;
+  margin-top: clamp(56px, 8vw, 96px);
+  padding-block: clamp(40px, 5vw, 64px) 32px;
+  background: var(--sunken);
+  border-top: 1px solid var(--rule-strong);
 }
 .cs-near .in {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 24px;
-  padding-top: 32px;
-  border-top: 1px solid var(--rule-strong);
+}
+.cs-near h2 {
+  grid-column: 1 / -1;
+  margin: 0 0 8px;
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1.1;
 }
 .street .cs-door {
   display: grid;
