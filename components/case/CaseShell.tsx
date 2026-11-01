@@ -33,8 +33,6 @@ const labels = {
   openCode: { en: "Open the code", ru: "Открыть код", uz: "Kodni ochish" },
 } satisfies Record<string, L10n>;
 
-const STACK_SHOWN = 6;
-
 function Figure({ image, locale }: { image: CaseImage; locale: Locale }) {
   return (
     <figure className="frame">
@@ -137,10 +135,9 @@ export function CaseShell({
               ))}
             </ul>
             <ul className="cs-stack">
-              {p.stack.slice(0, STACK_SHOWN).map((s) => (
+              {p.stack.map((s) => (
                 <li key={s}>{s}</li>
               ))}
-              {p.stack.length > STACK_SHOWN && <li>+{p.stack.length - STACK_SHOWN}</li>}
             </ul>
           </div>
           <figure className="cs-shot">
