@@ -17,6 +17,17 @@ export function oklch(hex: string): { L: number; C: number; H: number } {
   return { L, C: Math.hypot(a, bb), H: ((Math.atan2(bb, a) * 180) / Math.PI + 360) % 360 };
 }
 
+/** The text colour readable on a solid fill: whichever of black and white has more contrast (always at least 4.5:1). */
+export function onColor(hex: string): "#000" | "#fff" {
+  const n = parseInt(hex.slice(1), 16);
+  const lin = (c: number) => {
+    c /= 255;
+    return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+  };
+  const Y = 0.2126 * lin((n >> 16) & 255) + 0.7152 * lin((n >> 8) & 255) + 0.0722 * lin(n & 255);
+  return 1.05 / (Y + 0.05) > (Y + 0.05) / 0.05 ? "#fff" : "#000";
+}
+
 /**
  * The colour field a project spread stands on: its accent's hue at paper lightness by day
  * and at charcoal lightness by evening. Hue tells the projects apart, lightness stays calm.

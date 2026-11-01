@@ -34,11 +34,11 @@ const no = {
 };
 
 const t = {
-  heading: { en: "How I found the answer", ru: "Как я нашёл ответ", uz: "Javobni qanday topdim" },
+  heading: { en: "Where the answer comes from: the RAG search steps", ru: "Откуда взят ответ: шаги RAG-поиска", uz: "Javob qayerdan olinadi: RAG qidiruv qadamlari" },
   intro: {
-    en: "Two real questions, sent to the live chat. Every answer in the product opens the same panel.",
-    ru: "Два настоящих вопроса к живому чату. Такая же панель открывается у каждого ответа в продукте.",
-    uz: "Jonli chatga berilgan ikkita haqiqiy savol. Mahsulotdagi har bir javobda xuddi shu panel ochiladi.",
+    en: "Two real questions to the live chat: one from the knowledge base, one outside it. This panel opens under every answer.",
+    ru: "Два настоящих вопроса к живому чату: один из базы знаний, второй вне её. Такая панель открывается у каждого ответа.",
+    uz: "Jonli chatga ikkita haqiqiy savol: biri bilimlar bazasidan, ikkinchisi undan tashqarida. Bu panel har bir javob ostida ochiladi.",
   },
   inBase: { en: "In the base", ru: "Есть в базе", uz: "Bazada bor" },
   outside: { en: "Outside the base", ru: "Нет в базе", uz: "Bazada yo‘q" },

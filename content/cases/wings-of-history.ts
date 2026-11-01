@@ -2,7 +2,17 @@ import type { CaseContent } from "./types";
 
 export const wingsOfHistory: CaseContent = {
   slug: "wings-of-history",
+  kind: {
+    en: "Museum site",
+    ru: "Сайт музея",
+    uz: "Muzey sayti",
+  },
   title: {
+    en: "The site of a fictional aviation museum in Tashkent.",
+    ru: "Сайт вымышленного музея авиации в Ташкенте.",
+    uz: "Toshkentdagi xayoliy aviatsiya muzeyi sayti.",
+  },
+  hook: {
     en: "A museum site whose labels are edited in a database, not in code.",
     ru: "Сайт музея, подписи которого редактируются в базе, а не в коде.",
     uz: "Yozuvlari kodda emas, bazada tahrirlanadigan muzey sayti.",

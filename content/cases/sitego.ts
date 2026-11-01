@@ -2,7 +2,17 @@ import type { CaseContent } from "./types";
 
 export const sitego: CaseContent = {
   slug: "sitego",
+  kind: {
+    en: "Site builder",
+    ru: "Конструктор сайтов",
+    uz: "Sayt konstruktori",
+  },
   title: {
+    en: "A no-code CMS: block editor, twelve templates and export to HTML.",
+    ru: "No-code CMS: блочный редактор, двенадцать шаблонов и экспорт в HTML.",
+    uz: "No-code CMS: blokli muharrir, o‘n ikki shablon va HTMLga eksport.",
+  },
+  hook: {
     en: "Twelve sites that don't look related, and a ZIP that looks the same as the live one.",
     ru: "Двенадцать сайтов, не похожих друг на друга, и ZIP, который выглядит точно как живой сайт.",
     uz: "Bir-biriga o‘xshamaydigan o‘n ikkita sayt va jonli saytdek ko‘rinadigan ZIP.",

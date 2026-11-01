@@ -1,21 +1,21 @@
 /* ------------------------------------------------------------------ */
 /* The street design (home route). Tokens follow plan A § 1: paper by  */
-/* day, warm charcoal by evening; colour comes from the sky and from   */
-/* each project's own field, the garnet accent is for links only.      */
+/* day, cool graphite by evening; colour comes from the sky and from   */
+/* each project's own field, the blue accent is for links only.        */
 /* Dark mode is the `.dark` class next-themes puts on <html>.          */
 /* ------------------------------------------------------------------ */
 :root {
-  --paper: oklch(0.965 0.004 50);
-  --raised: oklch(0.985 0.003 50);
-  --sunken: oklch(0.94 0.005 50);
-  --ink: oklch(0.22 0.01 70);
-  --ink-2: oklch(0.45 0.01 70);
-  --rule: oklch(0.88 0.006 90);
-  --rule-strong: oklch(0.78 0.008 90);
-  --garnet: oklch(0.46 0.15 22);
+  --paper: oklch(0.975 0.002 255);
+  --raised: oklch(0.995 0.001 255);
+  --sunken: oklch(0.95 0.003 255);
+  --ink: oklch(0.2 0.008 255);
+  --ink-2: oklch(0.46 0.008 255);
+  --rule: oklch(0.89 0.003 255);
+  --rule-strong: oklch(0.78 0.005 255);
+  --garnet: oklch(0.48 0.15 265);
   --live: oklch(0.5 0.12 150);
   --cold: oklch(0.48 0.1 75);
-  --glass: oklch(0.965 0.005 95 / 0.72);
+  --glass: oklch(0.98 0.002 255 / 0.62);
   --glass-edge: oklch(0 0 0 / 0.06);
   --show-day: block;
   --show-eve: none;
@@ -26,17 +26,17 @@
   --vt-y: 50%;
 }
 .dark {
-  --paper: oklch(0.27 0.012 50);
-  --raised: oklch(0.31 0.014 50);
-  --sunken: oklch(0.24 0.01 50);
-  --ink: oklch(0.92 0.01 80);
-  --ink-2: oklch(0.7 0.012 75);
-  --rule: oklch(0.38 0.012 65);
-  --rule-strong: oklch(0.5 0.012 65);
-  --garnet: oklch(0.78 0.11 25);
+  --paper: oklch(0.2 0.008 255);
+  --raised: oklch(0.24 0.009 255);
+  --sunken: oklch(0.17 0.008 255);
+  --ink: oklch(0.94 0.004 255);
+  --ink-2: oklch(0.72 0.008 255);
+  --rule: oklch(0.32 0.008 255);
+  --rule-strong: oklch(0.45 0.01 255);
+  --garnet: oklch(0.78 0.11 265);
   --live: oklch(0.76 0.11 150);
   --cold: oklch(0.8 0.1 75);
-  --glass: oklch(0.27 0.012 60 / 0.64);
+  --glass: oklch(0.2 0.008 255 / 0.55);
   --glass-edge: oklch(1 0 0 / 0.08);
   --show-day: none;
   --show-eve: block;
@@ -177,7 +177,9 @@ html:has(.street) body {
 .street .hero {
   scroll-margin-top: 60px;
   position: relative;
-  min-height: min(86svh, 920px);
+  height: calc(100svh - 61px);
+  min-height: 560px;
+  max-height: 1000px;
   align-items: stretch;
   border-bottom: 1px solid var(--rule);
   overflow: hidden;
@@ -185,9 +187,9 @@ html:has(.street) body {
 .street .hero .text {
   grid-column: 2 / 7;
   align-self: center;
-  padding-block: 56px;
+  padding-block: 24px;
   display: grid;
-  gap: 24px;
+  gap: 16px;
   min-width: 0;
 }
 .street .place {
@@ -198,7 +200,7 @@ html:has(.street) body {
 }
 .street .say {
   margin: 0;
-  font: 400 clamp(38px, 5.6vw, 80px) / 1 var(--serif);
+  font: 400 clamp(34px, min(4.6vw, 8.2svh), 72px) / 1 var(--serif);
   letter-spacing: -0.015em;
 }
 .street .lede {
@@ -224,12 +226,14 @@ html:has(.street) body {
 .street .scene {
   position: absolute;
   inset: 0;
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 20%), linear-gradient(to top, transparent, #000 24%);
-  -webkit-mask-composite: source-in;
-  mask-image: linear-gradient(to right, transparent, #000 20%), linear-gradient(to top, transparent, #000 24%);
-  mask-composite: intersect;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 20%);
+  mask-image: linear-gradient(to right, transparent, #000 20%);
 }
 .street .stage {
+  position: absolute;
+  inset: 0;
+}
+.street .stage-host {
   position: absolute;
   inset: 0;
 }
@@ -238,7 +242,7 @@ html:has(.street) body {
   width: 100%;
   height: 100%;
 }
-.street .stage[data-state="live"] canvas {
+.street .stage[data-state="live"]:not([data-back]) canvas {
   animation: street-fade 900ms ease-out both;
 }
 @keyframes street-fade {
@@ -273,6 +277,10 @@ html:has(.street) body {
 .street .hero:not([data-mode="scene"]) .stage {
   visibility: hidden;
 }
+/* back from another page the scene is already there: nothing fades */
+.street .hero[data-mode="scene"]:has(.stage[data-back]) .poster {
+  transition: none;
+}
 /* the poster stays painted while the canvas fades in over it, then leaves */
 .street .hero[data-mode="scene"] .poster {
   visibility: hidden;
@@ -284,25 +292,27 @@ html:has(.street) body {
   top: 0;
   z-index: 2;
   pointer-events: none;
-  padding: 7px 12px 8px;
-  background: var(--glass);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  border-bottom: 2px solid var(--acc, var(--garnet));
-  white-space: nowrap;
-  max-width: 46ch;
-}
-.street .label b {
-  display: block;
-  font-weight: 600;
-  font-size: 15px;
-}
-.street .label span {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 10px 4px 8px;
   font-size: 13px;
-  color: var(--ink-2);
-  white-space: normal;
-  max-width: 42ch;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--raised);
+  border-radius: 999px;
+  box-shadow: 0 2px 10px oklch(0 0 0 / 0.18);
+  white-space: nowrap;
+}
+.street .label[hidden] {
+  display: none;
+}
+.street .label::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--acc, var(--garnet));
 }
 .street .cap {
   position: absolute;
@@ -327,7 +337,7 @@ html:has(.street) body {
   position: absolute;
   left: 22%;
   right: var(--gutter-r);
-  bottom: 40px;
+  bottom: 20px;
   z-index: 3;
   display: flex;
   align-items: center;
@@ -345,6 +355,7 @@ html:has(.street) body {
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border: 1px solid var(--rule-strong);
+  border-radius: 50%;
   cursor: pointer;
 }
 .street .st-nav button:hover {
@@ -352,14 +363,23 @@ html:has(.street) body {
 }
 .street .st-now {
   min-width: 0;
-  padding: 9px 12px;
+  padding: 9px 16px;
+  border-radius: 999px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   background: var(--glass);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  border-bottom: 2px solid var(--acc, var(--garnet));
+}
+.street .st-now::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: var(--acc, var(--garnet));
 }
 .street .st-now span {
   margin-left: 8px;
@@ -369,19 +389,21 @@ html:has(.street) body {
 .street .st-card {
   position: absolute;
   right: var(--gutter-r);
-  bottom: 92px;
+  bottom: 76px;
   z-index: 4;
-  width: min(380px, calc(100% - 2 * 16px));
-  padding: 18px 20px 16px;
+  width: min(400px, calc(100% - 2 * 16px));
+  max-height: calc(100% - 96px);
+  overflow: auto;
+  padding: 20px 22px 20px;
+  border-radius: 22px;
   display: grid;
   gap: 8px;
   transform-origin: 0 0;
   background: var(--glass);
-  -webkit-backdrop-filter: blur(18px) saturate(1.5);
-  backdrop-filter: blur(18px) saturate(1.5);
+  -webkit-backdrop-filter: blur(22px) saturate(1.6);
+  backdrop-filter: blur(22px) saturate(1.6);
   border: 1px solid var(--glass-edge);
-  border-top: 2px solid var(--acc, var(--garnet));
-  box-shadow: 0 18px 50px oklch(0 0 0 / 0.22);
+  box-shadow: 0 24px 60px oklch(0 0 0 / 0.28);
 }
 /* the scene draws the glass under the card itself */
 .street .st-card[data-glass] {
@@ -389,15 +411,25 @@ html:has(.street) body {
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
   border-color: transparent;
-  border-top-color: var(--acc, var(--garnet));
 }
 .street .st-card h2 {
   margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   padding-right: 32px;
   font-family: var(--serif);
   font-size: 26px;
   font-weight: 400;
   line-height: 1.15;
+}
+.street .st-card h2::before {
+  content: "";
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--acc, var(--garnet));
 }
 .street .st-card p {
   margin: 0;
@@ -407,14 +439,30 @@ html:has(.street) body {
 .street .st-card ul {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px 18px;
-  margin: 4px 0 0;
+  gap: 8px;
+  margin: 6px 0 0;
   padding: 0;
   list-style: none;
   font-size: 15px;
 }
 .street .st-card a {
-  color: var(--garnet);
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 16px;
+  border: 1px solid color-mix(in oklch, var(--ink) 45%, transparent);
+  border-radius: 999px;
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: none;
+}
+.street .st-card a:hover {
+  border-color: var(--ink);
+}
+.street .st-card a.go {
+  background: var(--acc);
+  border-color: var(--acc);
+  color: var(--acc-on);
 }
 .street .st-card .x {
   position: absolute;

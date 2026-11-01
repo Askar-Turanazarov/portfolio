@@ -2,10 +2,33 @@ import type { CaseContent } from "./types";
 
 export const cvForge: CaseContent = {
   slug: "cv-forge",
+  kind: {
+    en: "CV builder",
+    ru: "Конструктор резюме",
+    uz: "Rezyume konstruktori",
+  },
   title: {
+    en: "A CV builder with AI wording, templates and PDF export.",
+    ru: "Конструктор резюме с ИИ-формулировками, шаблонами и экспортом в PDF.",
+    uz: "AI matnlar, shablonlar va PDF eksport bilan rezyume konstruktori.",
+  },
+  hook: {
     en: "One CV, forty-eight sheets. One of them is a boarding pass.",
     ru: "Одно резюме, сорок восемь листов. Один из них посадочный талон.",
     uz: "Bitta rezyume, qirq sakkizta varaq. Ulardan biri bort taloni.",
+  },
+  cover: {
+    src: "/projects/cv-forge/cover.webp",
+    alt: {
+      en: "The CV Forge start page with three sample resumes.",
+      ru: "Стартовая страница CV Forge с тремя образцами резюме.",
+      uz: "Uchta namunaviy rezyume bilan CV Forge bosh sahifasi.",
+    },
+    caption: {
+      en: "The start page. The people on the sample resumes are invented.",
+      ru: "Стартовая страница. Люди на образцах резюме вымышленные.",
+      uz: "Bosh sahifa. Namunaviy rezyumelardagi odamlar to‘qima.",
+    },
   },
   problem: {
     en: "Most résumé builders offer a handful of near-identical layouts, so the document looks like everybody else's before anyone reads it.",

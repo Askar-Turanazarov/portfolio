@@ -2,10 +2,33 @@ import type { CaseContent } from "./types";
 
 export const askarBank: CaseContent = {
   slug: "askar-bank",
+  kind: {
+    en: "App demo",
+    ru: "Демо приложения",
+    uz: "Ilova demosi",
+  },
   title: {
+    en: "A mobile bank demo: 3D card carousel, card number validation, payments and history.",
+    ru: "Демо мобильного банка: 3D-карусель карт, проверка номера карты, платежи и история.",
+    uz: "Mobil bank demosi: 3D karta karuseli, karta raqami tekshiruvi, to‘lovlar va tarix.",
+  },
+  hook: {
     en: "A mobile bank demo with no real money, and one algorithm you can walk through by hand.",
     ru: "Демо мобильного банка без настоящих денег и один алгоритм, который можно пройти вручную.",
     uz: "Haqiqiy pulsiz mobil bank demosi va qo‘lda bosib o‘tish mumkin bo‘lgan bitta algoritm.",
+  },
+  cover: {
+    src: "/projects/askar-bank/cover.webp",
+    alt: {
+      en: "The Askar Bank home screen: total balance, a HUMO card and recent transactions.",
+      ru: "Главный экран Askar Bank: общий баланс, карта HUMO и последние операции.",
+      uz: "Askar Bank bosh ekrani: umumiy balans, HUMO kartasi va so‘nggi operatsiyalar.",
+    },
+    caption: {
+      en: "The home screen. The money and the names are invented.",
+      ru: "Главный экран. Суммы и имена вымышленные.",
+      uz: "Bosh ekran. Summalar va ismlar to‘qima.",
+    },
   },
   problem: {
     en: "I wanted to see how far a payment app's feel could go in a browser: swipes between cards, quick amounts, a success screen.",

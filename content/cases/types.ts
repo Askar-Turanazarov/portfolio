@@ -5,13 +5,17 @@ export type CaseImage = { src: string; alt: L10n; caption: L10n };
 /** One long-form project page. A section with no data is not rendered. */
 export type CaseContent = {
   slug: string;
-  /** The page's one sentence: what is specific about this project. */
+  /** What kind of thing this is, in two words: the label above the project's name. */
+  kind: L10n;
+  /** One plain sentence under the name: what the product is and does. */
   title: L10n;
+  /** The specific angle of this project; opens its own block further down the page. */
+  hook: L10n;
   problem: L10n;
   audience?: L10n;
   /** One honest line next to the status: study project, invented company and so on. */
   note?: L10n;
-  cover?: CaseImage;
+  cover: CaseImage;
   built?: { name: L10n; text: L10n }[];
   /** Layers from the visitor down to storage. */
   arch?: { alt: L10n; layers: { label: L10n; nodes: string[] }[] };

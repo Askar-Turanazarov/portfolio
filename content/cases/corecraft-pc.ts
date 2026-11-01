@@ -2,7 +2,17 @@ import type { CaseContent } from "./types";
 
 export const corecraftPc: CaseContent = {
   slug: "corecraft-pc",
+  kind: {
+    en: "Online store",
+    ru: "Интернет-магазин",
+    uz: "Internet do‘kon",
+  },
   title: {
+    en: "A PC components store with a builder that checks compatibility.",
+    ru: "Магазин комплектующих со сборщиком, который проверяет совместимость.",
+    uz: "Moslikni tekshiruvchi yig‘uvchili kompyuter qismlari do‘koni.",
+  },
+  hook: {
     en: "Try to build a PC that doesn't fit. The checker will tell you why.",
     ru: "Попробуйте собрать компьютер, который не соберётся. Конструктор объяснит, почему.",
     uz: "Yig‘ilmaydigan kompyuter yig‘ib ko‘ring. Konstruktor sababini aytadi.",

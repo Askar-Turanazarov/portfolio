@@ -2,7 +2,17 @@ import type { CaseContent } from "./types";
 
 export const marginflowCrm: CaseContent = {
   slug: "marginflow-crm",
+  kind: {
+    en: "CRM",
+    ru: "CRM",
+    uz: "CRM",
+  },
   title: {
+    en: "Office CRM for a web studio: roles, clients on a map, requests, office plan and check-in.",
+    ru: "Офисная CRM для веб-студии: роли, клиенты на карте, заявки, план офиса и чек-ин.",
+    uz: "Veb-studiya uchun ofis CRM: rollar, xaritadagi mijozlar, so‘rovlar, ofis rejasi va check-in.",
+  },
+  hook: {
     en: "Who is in, who is late, who is free to take the next job, on one floor plan.",
     ru: "Кто на месте, кто опоздал и кто свободен для следующей заявки: всё на одном плане офиса.",
     uz: "Kim joyida, kim kechikdi, keyingi ishni kim olishi mumkin: hammasi bitta ofis rejasida.",

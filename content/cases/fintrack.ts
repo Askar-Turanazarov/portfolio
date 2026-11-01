@@ -2,7 +2,17 @@ import type { CaseContent } from "./types";
 
 export const fintrack: CaseContent = {
   slug: "fintrack",
+  kind: {
+    en: "Web app",
+    ru: "Веб-приложение",
+    uz: "Veb-ilova",
+  },
   title: {
+    en: "A personal finance tracker: income, expenses, recurring payments and charts.",
+    ru: "Трекер личных финансов: доходы, расходы, регулярные платежи и графики.",
+    uz: "Shaxsiy moliya trekeri: daromad, xarajat, takroriy to‘lovlar va grafiklar.",
+  },
+  hook: {
     en: "Where did the month go? One page, in columns.",
     ru: "Куда ушёл месяц? Одна страница, в колонках.",
     uz: "Oy qayerga ketdi? Bitta sahifa, ustunlarda.",

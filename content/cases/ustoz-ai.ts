@@ -2,7 +2,17 @@ import type { CaseContent } from "./types";
 
 export const ustozAi: CaseContent = {
   slug: "ustoz-ai",
+  kind: {
+    en: "SaaS",
+    ru: "SaaS",
+    uz: "SaaS",
+  },
   title: {
+    en: "English tutor by subscription: plans, trial, billing and a pronunciation coach.",
+    ru: "Репетитор английского по подписке: тарифы, триал, биллинг и тренер произношения.",
+    uz: "Obunali ingliz tili repetitori: tariflar, sinov davri, billing va talaffuz murabbiyi.",
+  },
+  hook: {
     en: "The hard part of a subscription isn't the chat. It's the day the card fails.",
     ru: "Самое сложное в подписке не чат, а день, когда карта не прошла.",
     uz: "Obunaning eng qiyin joyi chat emas, karta o‘tmay qolgan kun.",

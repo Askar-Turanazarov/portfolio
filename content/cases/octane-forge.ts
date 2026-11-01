@@ -2,7 +2,17 @@ import type { CaseContent } from "./types";
 
 export const octaneForge: CaseContent = {
   slug: "octane-forge",
+  kind: {
+    en: "Business automation",
+    ru: "Автоматизация бизнеса",
+    uz: "Biznes avtomatlashtiruvi",
+  },
   title: {
+    en: "Booking for a car tuning atelier: site, calendar, Telegram bot, mini app and owner dashboard.",
+    ru: "Запись в автоателье: сайт, календарь, Telegram-бот, мини-приложение и дашборд владельца.",
+    uz: "Avto-atelyega yozilish: sayt, kalendar, Telegram bot, mini-ilova va egasi uchun dashboard.",
+  },
+  hook: {
     en: "The AI can fail halfway through a booking. The customer won't notice.",
     ru: "AI может упасть посреди записи. Клиент этого не заметит.",
     uz: "AI bron o‘rtasida ishdan chiqishi mumkin. Mijoz buni sezmaydi.",

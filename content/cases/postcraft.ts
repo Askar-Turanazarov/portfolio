@@ -2,7 +2,17 @@ import type { CaseContent } from "./types";
 
 export const postcraft: CaseContent = {
   slug: "postcraft",
+  kind: {
+    en: "AI generator",
+    ru: "AI-генератор",
+    uz: "AI generator",
+  },
   title: {
+    en: "A post generator for eight social platforms on four AI providers.",
+    ru: "Генератор постов для восьми соцсетей на четырёх ИИ-провайдерах.",
+    uz: "To‘rtta AI provayderda sakkiz platforma uchun post generatori.",
+  },
+  hook: {
     en: "One topic, eight platforms, and a separate rule set for each.",
     ru: "Одна тема, восемь площадок и свои правила для каждой.",
     uz: "Bitta mavzu, sakkizta platforma va har biri uchun alohida qoida.",

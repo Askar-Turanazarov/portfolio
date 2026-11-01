@@ -2,7 +2,17 @@ import type { CaseContent } from "./types";
 
 export const orbitLanding: CaseContent = {
   slug: "orbit-landing",
+  kind: {
+    en: "AI landing page",
+    ru: "Лендинг с AI",
+    uz: "AI lending",
+  },
   title: {
+    en: "A web studio landing page with an AI quiz, lead qualification and Telegram notifications.",
+    ru: "Лендинг веб-студии с ИИ-квизом, квалификацией заявок и уведомлениями в Telegram.",
+    uz: "AI viktorina, lidlarni saralash va Telegram bildirishnomalari bilan veb-studiya lendingi.",
+  },
+  hook: {
     en: "The code calculates the price. The AI explains it.",
     ru: "Цену считает код. Объясняет её AI.",
     uz: "Narxni kod hisoblaydi. Uni AI tushuntiradi.",

@@ -2,7 +2,17 @@ import type { CaseContent } from "./types";
 
 export const skydentalRag: CaseContent = {
   slug: "skydental-rag",
+  kind: {
+    en: "AI assistant",
+    ru: "AI-ассистент",
+    uz: "AI yordamchi",
+  },
   title: {
+    en: "A dental clinic assistant that answers only from the knowledge base and shows how it found the answer.",
+    ru: "Ассистент стоматологии отвечает только по базе знаний и показывает, как нашёл ответ.",
+    uz: "Faqat bilimlar bazasidan javob beradigan va javobni qanday topganini ko‘rsatadigan stomatologiya yordamchisi.",
+  },
+  hook: {
     en: "A clinic chat that shows where every answer came from, and says so when it doesn't know.",
     ru: "Чат клиники, который показывает, откуда взят каждый ответ, и честно говорит, когда не знает.",
     uz: "Har bir javob qayerdan olinganini ko‘rsatadigan va bilmasa, ochiq aytadigan klinika chati.",

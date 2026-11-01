@@ -2,7 +2,17 @@ import type { CaseContent } from "./types";
 
 export const galacticVault: CaseContent = {
   slug: "galactic-vault",
+  kind: {
+    en: "Store concept",
+    ru: "Концепт магазина",
+    uz: "Do‘kon konsepti",
+  },
   title: {
+    en: "A concept store for rare artifacts of the universe, in one HTML file.",
+    ru: "Концепт-магазин редких артефактов вселенной в одном HTML-файле.",
+    uz: "Bitta HTML fayldagi koinot noyob artefaktlari konsept-do‘koni.",
+  },
+  hook: {
     en: "A shop with teleport delivery, in a single HTML file.",
     ru: "Магазин с телепорт-доставкой в одном HTML-файле.",
     uz: "Teleport yetkazib berishli do‘kon bitta HTML faylda.",

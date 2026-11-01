@@ -7,7 +7,7 @@ import { caseOrder, cases } from "@/content/cases";
 import { getDictionary } from "@/lib/dictionary";
 import { hasLocale, locales, pick, type Locale } from "@/lib/i18n";
 import { CaseShell } from "@/components/case/CaseShell";
-import { Masthead } from "@/components/street/Masthead";
+import { ProjectBar } from "@/components/case/ProjectBar";
 
 type Params = Promise<{ lang: string; slug: string }>;
 
@@ -73,18 +73,20 @@ export default async function CasePage({ params }: { params: Params }) {
   const at = caseOrder.indexOf(slug);
   const neighbour = (i: number) => {
     const s = caseOrder[(i + caseOrder.length) % caseOrder.length];
-    return { slug: s, name: getProject(s)?.name ?? s };
+    return { slug: s, name: getProject(s)?.name ?? s, title: cases[s].title, cover: cases[s].cover, accent: getProject(s)?.accent ?? project.accent };
   };
   const Block = blocks[slug];
-  const anchor = project.featured ? `spread-${slug}` : `row-${slug === "first-steps" ? "first-clicker" : slug}`;
 
   return (
     <>
-      <Masthead
+      <ProjectBar
         dict={dict}
         locale={lang}
-        anchorBase={`/${lang}`}
-        langPath={`/projects/${slug}`}
+        slug={slug}
+        at={at + 1}
+        total={caseOrder.length}
+        prev={neighbour(at - 1)}
+        next={neighbour(at + 1)}
       />
       <CaseShell
         dict={dict}
@@ -93,7 +95,7 @@ export default async function CasePage({ params }: { params: Params }) {
         content={content}
         prev={neighbour(at - 1)}
         next={neighbour(at + 1)}
-        backHref={`/${lang}#${anchor}`}
+        backHref={`/${lang}`}
       >
         {Block && <Block locale={lang} />}
       </CaseShell>

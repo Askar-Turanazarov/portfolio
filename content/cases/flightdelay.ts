@@ -2,7 +2,17 @@ import type { CaseContent } from "./types";
 
 export const flightdelay: CaseContent = {
   slug: "flightdelay",
+  kind: {
+    en: "ML service",
+    ru: "ML-сервис",
+    uz: "ML xizmat",
+  },
   title: {
+    en: "Pre-departure delay risk for a flight, with the reasons and the cost.",
+    ru: "Риск задержки рейса до вылета, с причинами и стоимостью.",
+    uz: "Uchishdan oldin reys kechikishi xavfi, sabablari va narxi bilan.",
+  },
+  hook: {
     en: "Catching more delays costs more false alarms. I let you pick the trade.",
     ru: "Поймать больше задержек значит получить больше ложных тревог. Выбор здесь за вами.",
     uz: "Ko‘proq kechikishni aniqlash ko‘proq yolg‘on signal beradi. Tanlov sizda.",

@@ -1,6 +1,6 @@
 /** Types for scene.js, the plain-JS street scene (shared with the preview tooling). */
 export type TimeName = "day" | "evening";
-export type Quality = "low" | "mid" | "high" | "ultra";
+export type Quality = "low" | "mid" | "high";
 export type GpuKind = "integrated" | "discrete" | "software" | "unknown";
 export type GpuInfo = { renderer: string; vendor: string; kind: GpuKind };
 
@@ -58,6 +58,8 @@ export type SceneStats = {
   buffer: [number, number];
   x: number;
   level: Quality;
+  /** The loop has stopped: nothing is about to change on screen. */
+  asleep: boolean;
   renderer: string;
   kind: GpuKind;
   log: string[];
@@ -77,6 +79,8 @@ export type SceneHandle = {
   hold(dir: 1 | -1 | 0): void;
   setGlass(rect: { x: number; y: number; w: number; h: number } | null): boolean;
   release(): void;
+  current(): { slug: string | null; open: boolean };
+  jumpTo(slug: string, open?: boolean): void;
   highlight(slug: string | null): void;
   setView(view: { x?: number; phase?: number; az?: number; height?: number }): void;
   pause(paused: boolean): void;

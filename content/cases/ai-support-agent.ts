@@ -2,7 +2,17 @@ import type { CaseContent } from "./types";
 
 export const aiSupportAgent: CaseContent = {
   slug: "ai-support-agent",
+  kind: {
+    en: "Support chat",
+    ru: "Чат поддержки",
+    uz: "Qo‘llab-quvvatlash chati",
+  },
   title: {
+    en: "A streaming support chat: 44 scenarios work even with no API key.",
+    ru: "Чат поддержки со стримингом: 44 сценария работают даже без API-ключа.",
+    uz: "Oqimli qo‘llab-quvvatlash chati: 44 ssenariy API kalitsiz ham ishlaydi.",
+  },
+  hook: {
     en: "Works without a key. Add one, and the same chat runs on a real model.",
     ru: "Работает без ключа. Добавьте ключ, и тот же чат пойдёт на настоящей модели.",
     uz: "Kalitsiz ishlaydi. Kalit qo‘shsangiz, o‘sha chat haqiqiy modelda ishlaydi.",

@@ -2,7 +2,17 @@ import type { CaseContent } from "./types";
 
 export const domusEstate: CaseContent = {
   slug: "domus-estate",
+  kind: {
+    en: "Sales platform",
+    ru: "Платформа продаж",
+    uz: "Savdo platformasi",
+  },
   title: {
+    en: "Selling apartments in a new building: 3D tour, booking, payments, AI consultant.",
+    ru: "Продажа квартир в новостройке: 3D-тур, бронь, оплата и ИИ-консультант.",
+    uz: "Yangi uyda kvartira sotuvi: 3D sayohat, bron, to‘lov, AI maslahatchi.",
+  },
+  hook: {
     en: "One apartment cannot be sold twice, whichever door the buyer comes through.",
     ru: "Одну квартиру нельзя продать дважды, через какую бы дверь ни пришёл покупатель.",
     uz: "Xaridor qaysi yo‘ldan kelmasin, bitta kvartirani ikki marta sotib bo‘lmaydi.",

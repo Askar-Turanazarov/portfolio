@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 import type { Quality, SceneHandle } from "@/lib/street/scene";
 import { getScene, setScene } from "@/lib/street/bridge";
+import { keep, type SceneHandlers } from "@/lib/street/keep";
+import { onColor } from "@/lib/color";
 
 type Card = { slug: string; name: string; tagline: string; accent: string; href: string; live?: string };
 type Nav = { label: string; prev: string; next: string; hint: string; page: string; open: string; close: string };
@@ -36,12 +38,14 @@ export function StreetStage({ cards, nav, posterDay, posterEvening, stageLabel, 
   const prevBtn = useRef<HTMLButtonElement>(null);
   const nextBtn = useRef<HTMLButtonElement>(null);
   // which project the navigator names, which card is open and where its sign stood on screen when it opened
-  const [current, setCurrent] = useState(0);
-  const [open, setOpen] = useState<{ i: number; from: { x: number; y: number } | null } | null>(null);
+  // (back from another page, the parked scene knows both)
+  const [current, setCurrent] = useState(() => Math.max(0, cards.findIndex((c) => c.slug === keep.sc?.current().slug)));
+  const [open, setOpen] = useState<{ i: number; from: { x: number; y: number } | null } | null>(() => (keep.sc?.current().open ? { i: cards.findIndex((c) => c.slug === keep.sc?.current().slug), from: null } : null));
 
   const close = () => {
     setOpen(null);
     getScene()?.release();
+    keep.remember();
   };
 
   /** With the scene the camera travels and the card opens on arrival; on a poster the card opens at once. */
@@ -63,6 +67,8 @@ export function StreetStage({ cards, nav, posterDay, posterEvening, stageLabel, 
       getScene()?.setGlass(null);
       return;
     }
+    // back from a project page the card just stands where it stood
+    if (keep.returning) return;
     // CSS glass while it flies; the shader, on the levels that have it, once it stands still
     delete el.dataset.glass;
     getScene()?.setGlass(null);
@@ -128,7 +134,7 @@ export function StreetStage({ cards, nav, posterDay, posterEvening, stageLabel, 
       down.set(e.code, e.timeStamp);
       clearTimeout(timer);
       // holding walks; a short press is resolved on release
-      timer = window.setTimeout(() => getScene()?.hold(dir), 250);
+      timer = window.setTimeout(() => getScene()?.hold(dir), 180);
     };
     const onUp = (e: KeyboardEvent) => {
       const t0 = down.get(e.code);
@@ -136,7 +142,7 @@ export function StreetStage({ cards, nav, posterDay, posterEvening, stageLabel, 
       down.delete(e.code);
       clearTimeout(timer);
       getScene()?.hold(0);
-      if (e.timeStamp - t0 < 250) (e.code === "ArrowLeft" || e.code === "KeyA" ? prevBtn : nextBtn).current?.click();
+      if (e.timeStamp - t0 < 180) (e.code === "ArrowLeft" || e.code === "KeyA" ? prevBtn : nextBtn).current?.click();
     };
     const onBlur = () => {
       down.clear();
@@ -155,7 +161,7 @@ export function StreetStage({ cards, nav, posterDay, posterEvening, stageLabel, 
     };
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const el = stage.current;
     const hero = el?.closest<HTMLElement>(".hero");
     const root = el?.closest<HTMLElement>(".street");
@@ -186,7 +192,7 @@ export function StreetStage({ cards, nav, posterDay, posterEvening, stageLabel, 
 
     // The quality level is chosen inside the scene from the GPU the context lands on; ?q= overrides it.
     const qualityQ = q.get("q");
-    const quality: Quality | null = qualityQ === "low" || qualityQ === "mid" || qualityQ === "high" || qualityQ === "ultra" ? qualityQ : null;
+    const quality: Quality | null = qualityQ === "low" || qualityQ === "mid" || qualityQ === "high" ? qualityQ : null;
     // ?hfov= and ?h= exist to compare fields of view and eye heights; the scene has its own defaults
     const num = (key: string, lo: number, hi: number) => {
       const v = Number(q.get(key));
@@ -200,68 +206,114 @@ export function StreetStage({ cards, nav, posterDay, posterEvening, stageLabel, 
     let mo: MutationObserver | null = null;
     const onVis = () => sc?.pause(document.hidden);
 
+    // The scene outlives this component: it calls whoever is mounted now.
+    const handlers: SceneHandlers = {
+      onHover(slug, pt, b) {
+        const lb = label.current;
+        if (!lb) return;
+        if (!slug || !pt || !b) {
+          lb.hidden = true;
+          return;
+        }
+        lb.hidden = false;
+        lb.textContent = b.name;
+        lb.style.setProperty("--acc", b.accent);
+        lb.style.transform = `translate(${(pt.x + 14).toFixed(0)}px, ${(pt.y + 18).toFixed(0)}px)`;
+      },
+      onQuality(level) {
+        el.dataset.quality = level;
+        syncGlass.current();
+      },
+      onCurrent(slug) {
+        const i = cards.findIndex((c) => c.slug === slug);
+        if (i >= 0) setCurrent(i);
+        keep.remember();
+      },
+      onDepart() {
+        setOpen(null);
+        keep.remember();
+      },
+      onArrive(slug, pt) {
+        const i = cards.findIndex((c) => c.slug === slug);
+        if (i < 0) return;
+        setCurrent(i);
+        setOpen({ i, from: pt?.visible ? { x: pt.x, y: pt.y } : null });
+        keep.remember();
+      },
+    };
+    keep.handlers = handlers;
+
+    const watch = (scene: SceneHandle) => {
+      sc = scene;
+      setScene(scene);
+      el.dataset.quality = scene.level;
+      el.dataset.gpu = scene.gpu.kind;
+      io = new IntersectionObserver(([e]) => scene.pause(!e.isIntersecting || document.hidden), { threshold: 0.05 });
+      io.observe(hero);
+      document.addEventListener("visibilitychange", onVis);
+      mo = new MutationObserver(() => scene.setTime(isDark() ? "evening" : "day"));
+      mo.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+    };
+
+    // Back from another page: the same scene, the same view, the same building, on the very first frame.
+    if (keep.sc && keep.host) {
+      const back = keep.sc;
+      clearTimeout(keep.timer);
+      el.append(keep.host);
+      el.dataset.back = "1";
+      watch(back);
+      back.setTime(isDark() ? "evening" : "day", true);
+      back.pause(document.hidden);
+      live.current = true;
+      setMode("scene");
+      el.dataset.state = "live";
+      el.dataset.loaded = "1";
+      requestAnimationFrame(() => {
+        keep.returning = false;
+        syncGlass.current();
+      });
+      return () => leave();
+    }
+
     const boot = async () => {
       try {
         await Promise.all([document.fonts.load('600 80px "Golos Text"'), document.fonts.load('500 40px "Golos Text"')]).catch(() => undefined);
         const { createScene } = await import("@/lib/street/scene.js");
         if (cancelled) return;
-        sc = createScene(el, {
+        const host = document.createElement("div");
+        host.className = "stage-host";
+        el.append(host);
+        const debug = q.has("debug");
+        const scene = createScene(host, {
           quality,
           time: isDark() ? "evening" : "day",
           still: q.has("still"),
-          debug: q.has("debug"),
+          debug,
           govern: q.get("gov") !== "0",
           hfov,
           eye,
           texturePath: "/street/tex/",
-          onHover(slug, pt, b) {
-            const lb = label.current;
-            if (!lb) return;
-            if (!slug || !pt || !b) {
-              lb.hidden = true;
-              return;
-            }
-            lb.hidden = !pt.visible;
-            (lb.firstElementChild as HTMLElement).textContent = b.name;
-            (lb.lastElementChild as HTMLElement).textContent = cards.find((c) => c.slug === slug)?.tagline ?? "";
-            lb.style.setProperty("--acc", b.accent);
-            lb.style.transform = `translate(${pt.x.toFixed(0)}px, ${pt.y.toFixed(0)}px) translate(-50%, -100%)`;
-          },
-          onQuality(level) {
-            el.dataset.quality = level;
-            syncGlass.current();
-          },
-          onCurrent(slug) {
-            const i = cards.findIndex((c) => c.slug === slug);
-            if (i >= 0) setCurrent(i);
-          },
-          onDepart() {
-            setOpen(null);
-          },
-          onArrive(slug, pt) {
-            const i = cards.findIndex((c) => c.slug === slug);
-            if (i < 0) return;
-            setCurrent(i);
-            setOpen({ i, from: pt?.visible ? { x: pt.x, y: pt.y } : null });
-          },
+          onHover: (...a) => keep.handlers?.onHover(...a),
+          onQuality: (...a) => keep.handlers?.onQuality(...a),
+          onCurrent: (...a) => keep.handlers?.onCurrent(...a),
+          onDepart: () => keep.handlers?.onDepart(),
+          onArrive: (...a) => keep.handlers?.onArrive(...a),
         });
-        setScene(sc);
-        el.dataset.quality = sc.level;
-        el.dataset.gpu = sc.gpu.kind;
+        // a reload lands where the visitor stood; the measurement scripts place the camera themselves
+        const was = debug ? null : keep.recall();
+        keep.sc = scene;
+        keep.host = host;
+        if (was?.slug) scene.jumpTo(was.slug, was.open);
+        watch(scene);
         // the poster stays until the first frame is drawn (programs linked, textures uploaded), then the canvas
         // fades in over it
-        sc.ready.then(() => {
+        scene.ready.then(() => {
           if (cancelled) return;
           live.current = true;
           setMode("scene");
           el.dataset.state = "live";
           el.dataset.loaded = "1";
         });
-        io = new IntersectionObserver(([e]) => sc?.pause(!e.isIntersecting || document.hidden), { threshold: 0.05 });
-        io.observe(hero);
-        document.addEventListener("visibilitychange", onVis);
-        mo = new MutationObserver(() => sc?.setTime(isDark() ? "evening" : "day"));
-        mo.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
       } catch (err) {
         console.error(err);
         setMode("poster");
@@ -280,16 +332,21 @@ export function StreetStage({ cards, nav, posterDay, posterEvening, stageLabel, 
     near.observe(hero);
 
     return () => {
+      near.disconnect();
+      leave();
+    };
+
+    function leave() {
       cancelled = true;
       live.current = false;
-      near.disconnect();
       io?.disconnect();
       mo?.disconnect();
       document.removeEventListener("visibilitychange", onVis);
       setScene(null);
-      sc?.dispose();
+      if (keep.handlers === handlers) keep.handlers = null;
       sc = null;
-    };
+      keep.park();
+    }
   }, [cards]);
 
   const now = cards[current];
@@ -309,10 +366,7 @@ export function StreetStage({ cards, nav, posterDay, posterEvening, stageLabel, 
         <img src="/street/poster-evening.webp" alt={posterEvening} loading="lazy" width={2160} height={1350} />
       </picture>
       <div ref={stage} className="stage" data-state="idle" role="img" aria-label={stageLabel} />
-      <div ref={label} className="label" hidden>
-        <b />
-        <span />
-      </div>
+      <div ref={label} className="label" hidden />
       <p className="cap">
         {caption}
         <span className="only-scene"> {captionScene}</span>
@@ -333,20 +387,22 @@ export function StreetStage({ cards, nav, posterDay, posterEvening, stageLabel, 
         </p>
       </div>
       {card && (
-        <div ref={cardEl} className="st-card" role="group" aria-labelledby="st-card-name" aria-live="polite" style={{ "--acc": card.accent } as CSSProperties}>
+        <div ref={cardEl} className="st-card" role="group" aria-labelledby="st-card-name" aria-live="polite" style={{ "--acc": card.accent, "--acc-on": onColor(card.accent) } as CSSProperties}>
           <h2 id="st-card-name">{card.name}</h2>
           <p>{card.tagline}</p>
           <ul>
-            <li>
-              <Link href={card.href}>{nav.page}</Link>
-            </li>
             {card.live && (
               <li>
-                <a href={card.live} target="_blank" rel="noopener noreferrer">
+                <a className="go" href={card.live} target="_blank" rel="noopener noreferrer">
                   {nav.open}
                 </a>
               </li>
             )}
+            <li>
+              <Link className={card.live ? undefined : "go"} href={card.href} onClick={() => document.documentElement.style.setProperty("--next-ac", card.accent)}>
+                {nav.page}
+              </Link>
+            </li>
           </ul>
           <button type="button" className="x" onClick={close} aria-label={nav.close}>
             ×

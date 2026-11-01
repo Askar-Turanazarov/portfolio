@@ -2,7 +2,17 @@ import type { CaseContent } from "./types";
 
 export const hrSimulator: CaseContent = {
   slug: "hr-simulator",
+  kind: {
+    en: "AI trainer",
+    ru: "AI-тренажёр",
+    uz: "AI trenajyor",
+  },
   title: {
+    en: "An interview trainer that asks follow-ups and ends with an honest breakdown.",
+    ru: "Тренажёр собеседований: задаёт уточняющие вопросы и заканчивает честным разбором.",
+    uz: "Aniqlashtiruvchi savollar beradigan va halol tahlil bilan yakunlaydigan suhbat trenajyori.",
+  },
+  hook: {
     en: "An interviewer that can't change the subject until it has got to the bottom of your answer.",
     ru: "Рекрутёр, который не может сменить тему, пока не докопается до сути вашего ответа.",
     uz: "Javobingiz tagiga yetmaguncha mavzuni o‘zgartira olmaydigan rekruter.",

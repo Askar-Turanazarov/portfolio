@@ -2,7 +2,17 @@ import type { CaseContent } from "./types";
 
 export const domusFurniture3d: CaseContent = {
   slug: "domus-furniture-3d",
+  kind: {
+    en: "3D planner",
+    ru: "3D-планировщик",
+    uz: "3D rejalashtiruvchi",
+  },
   title: {
+    en: "A 2D/3D furniture planner with physical validation and order drawings.",
+    ru: "2D/3D-планировщик мебели с физической проверкой и чертежами заказа.",
+    uz: "Fizik tekshiruvli va buyurtma chizmalari bilan 2D/3D mebel rejalashtiruvchi.",
+  },
+  hook: {
     en: "Will the wardrobe fit? Drag it and find out, down to the centimetre.",
     ru: "Влезет ли шкаф? Перетащите и узнаете, с точностью до сантиметра.",
     uz: "Shkaf sig‘adimi? Suring va santimetrigacha bilib oling.",

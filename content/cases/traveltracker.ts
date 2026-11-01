@@ -2,7 +2,17 @@ import type { CaseContent } from "./types";
 
 export const traveltracker: CaseContent = {
   slug: "traveltracker",
+  kind: {
+    en: "Web app",
+    ru: "Веб-приложение",
+    uz: "Veb-ilova",
+  },
   title: {
+    en: "A personal travel diary: countries and cities on a world map.",
+    ru: "Личный дневник путешествий: страны и города на карте мира.",
+    uz: "Shaxsiy sayohat kundaligi: xaritadagi mamlakatlar va shaharlar.",
+  },
+  hook: {
     en: "A travel diary with a world map on top and token rotation underneath.",
     ru: "Дневник путешествий: сверху карта мира, снизу ротация токенов.",
     uz: "Sayohat kundaligi: tepada dunyo xaritasi, ostida tokenlar rotatsiyasi.",

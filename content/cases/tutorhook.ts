@@ -2,7 +2,17 @@ import type { CaseContent } from "./types";
 
 export const tutorhook: CaseContent = {
   slug: "tutorhook",
+  kind: {
+    en: "AI generator",
+    ru: "AI-генератор",
+    uz: "AI generator",
+  },
   title: {
+    en: "Selling posts for tutors in three languages, with three visual themes.",
+    ru: "Продающие посты для репетиторов на трёх языках, три визуальные темы.",
+    uz: "Repetitorlar uchun uch tilda sotuvchi postlar, uchta vizual mavzu.",
+  },
+  hook: {
     en: "One HTML file, one serverless function, three materials to choose from.",
     ru: "Один HTML-файл, одна бессерверная функция и три материала на выбор.",
     uz: "Bitta HTML fayl, bitta serverless funksiya va tanlash uchun uchta material.",
