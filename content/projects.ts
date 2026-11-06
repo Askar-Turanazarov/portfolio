@@ -17,14 +17,14 @@ const raw: ProjectInput[] = [
       uz: "Uchishdan oldin reys kechikishi xavfi, sabablari va narxi bilan.",
     },
     problem: {
-      en: "A dispatcher needs the risk before departure, when only the schedule is known.",
-      ru: "Диспетчеру нужен риск до вылета, когда известно только расписание.",
-      uz: "Dispetcherga xavf uchishdan oldin, faqat jadval ma’lum paytda kerak.",
+      en: "A dispatcher needs the risk before departure, when only the schedule and the weather forecast are known.",
+      ru: "Диспетчеру нужен риск до вылета, когда известны только расписание и прогноз погоды.",
+      uz: "Dispetcherga xavf uchishdan oldin, faqat jadval va ob-havo prognozi ma’lum paytda kerak.",
     },
     solution: {
-      en: "A CatBoost model with a recall-first threshold, SHAP explanations and an expected-loss estimate.",
-      ru: "Модель CatBoost с порогом в пользу полноты, объяснения SHAP и оценка ожидаемого убытка.",
-      uz: "Recall ustuvor chegarali CatBoost modeli, SHAP tushuntirishlari va kutilayotgan zarar bahosi.",
+      en: "Two CatBoost models to choose from: the diploma one with a recall-first threshold and a calibrated one that also knows the weather. SHAP explanations and an expected-loss estimate.",
+      ru: "Две модели CatBoost на выбор: дипломная с порогом в пользу полноты и откалиброванная, которая учитывает погоду. Объяснения SHAP и оценка ожидаемого убытка.",
+      uz: "Tanlash uchun ikkita CatBoost modeli: recall ustuvor chegarali diplom modeli va ob-havoni ham hisobga oladigan kalibrlangan model. SHAP tushuntirishlari va kutilayotgan zarar bahosi.",
     },
     forBusiness: {
       en: "Airline operations and any team deciding on rare, costly events",

@@ -18,14 +18,14 @@ export const flightdelay: CaseContent = {
     uz: "Ko‘proq kechikishni aniqlash ko‘proq yolg‘on signal beradi. Tanlov sizda.",
   },
   problem: {
-    en: "A dispatcher needs the risk before departure, when only the schedule, route, carrier and traffic are known, not after the plane is already late.",
-    ru: "Диспетчеру нужен риск до вылета, когда известны только расписание, маршрут, перевозчик и загрузка, а не когда самолёт уже опаздывает.",
-    uz: "Dispetcherga xavf uchishdan oldin kerak: o‘sha paytda faqat jadval, yo‘nalish, aviakompaniya va yuklama ma’lum bo‘ladi.",
+    en: "A dispatcher needs the risk before departure, when only the schedule, route, carrier, traffic and the weather forecast are known, not after the plane is already late.",
+    ru: "Диспетчеру нужен риск до вылета, когда известны только расписание, маршрут, перевозчик, загрузка и прогноз погоды, а не когда самолёт уже опаздывает.",
+    uz: "Dispetcherga xavf uchishdan oldin kerak: o‘sha paytda faqat jadval, yo‘nalish, aviakompaniya, yuklama va ob-havo prognozi ma’lum bo‘ladi.",
   },
   note: {
-    en: "My diploma model. The free demo may need up to a minute to wake and load.",
-    ru: "Моя дипломная модель. Бесплатному демо может понадобиться до минуты, чтобы проснуться и загрузиться.",
-    uz: "Diplom modelim. Bepul demoga uyg‘onish va yuklanish uchun bir daqiqagacha kerak bo‘lishi mumkin.",
+    en: "My diploma model and a newer one that also knows the weather; the demo switches between them. The free demo may need up to a minute to wake and load.",
+    ru: "Моя дипломная модель и более новая, которая учитывает погоду; в демо между ними можно переключаться. Бесплатному демо может понадобиться до минуты, чтобы проснуться и загрузиться.",
+    uz: "Diplom modelim va ob-havoni ham hisobga oladigan yangiroq model; demoda ular orasida almashish mumkin. Bepul demoga uyg‘onish va yuklanish uchun bir daqiqagacha kerak bo‘lishi mumkin.",
   },
   links: [
     { label: { en: "Model on Hugging Face", ru: "Модель на Hugging Face", uz: "Hugging Face’dagi model" }, href: "https://huggingface.co/AskarT/flight-delay-catboost" },
@@ -39,9 +39,9 @@ export const flightdelay: CaseContent = {
       uz: "FlightDelay xizmati tanlangan reys uchun kechikish ehtimolini ko‘rsatmoqda.",
     },
     caption: {
-      en: "The forecast. The probability is compared with the share of delays in the data, 18.9%.",
-      ru: "Прогноз. Вероятность сравнивается с долей задержек в данных, 18,9%.",
-      uz: "Prognoz. Ehtimol ma’lumotlardagi kechikish ulushi, ya’ni 18,9% bilan solishtiriladi.",
+      en: "The forecast of the diploma model. The probability is compared with the share of delays in the data, 18.9%.",
+      ru: "Прогноз дипломной модели. Вероятность сравнивается с долей задержек в данных, 18,9%.",
+      uz: "Diplom modelining prognozi. Ehtimol ma’lumotlardagi kechikish ulushi, ya’ni 18,9% bilan solishtiriladi.",
     },
   },
   built: [
@@ -51,6 +51,14 @@ export const flightdelay: CaseContent = {
         en: "A CatBoost classifier gives the probability of arriving more than 15 minutes late.",
         ru: "Классификатор CatBoost выдаёт вероятность прибытия с опозданием больше 15 минут.",
         uz: "CatBoost klassifikatori 15 daqiqadan ko‘p kechikib kelish ehtimolini beradi.",
+      },
+    },
+    {
+      name: { en: "Weather and a choice of model", ru: "Погода и выбор модели", uz: "Ob-havo va model tanlash" },
+      text: {
+        en: "The default model also takes wind, visibility, precipitation and hazards at both airports and returns a calibrated probability. The sidebar switches to the diploma model.",
+        ru: "Модель по умолчанию учитывает ещё ветер, видимость, осадки и опасные явления в обоих аэропортах и выдаёт откалиброванную вероятность. В боковой панели можно переключиться на дипломную модель.",
+        uz: "Sukut bo‘yicha model ikkala aeroportdagi shamol, ko‘rinish, yog‘ingarchilik va xavfli hodisalarni ham hisobga oladi va kalibrlangan ehtimol beradi. Yon panelda diplom modeliga o‘tish mumkin.",
       },
     },
     {
@@ -121,6 +129,14 @@ export const flightdelay: CaseContent = {
         en: "The first model weighed 433 MB and needed 1.5 GB of RAM, too much for free hosting. Six configurations later it is 114 MB and 0.6 GB, with AUC going from 0.786 to 0.779.",
         ru: "Первая модель весила 433 МБ и требовала 1,5 ГБ памяти: на бесплатном хостинге ей не место. После шести конфигураций стало 114 МБ и 0,6 ГБ, AUC снизился с 0,786 до 0,779.",
         uz: "Birinchi model 433 MB edi va 1,5 GB xotira talab qilardi, bepul xostingga sig‘masdi. Olti konfiguratsiyadan keyin 114 MB va 0,6 GB bo‘ldi, AUC 0,786 dan 0,779 ga tushdi.",
+      },
+    },
+    {
+      title: { en: "New dates are harder", ru: "Новые даты сложнее", uz: "Yangi sanalar qiyinroq" },
+      text: {
+        en: "0.786 is measured on random flights from dates the model had already seen. On June to December it falls to 0.63: in part the model memorises bad days. More data barely helped (0.659 on 73 hidden days). Hourly weather at both airports lifted it to 0.699; the demo's light version scores 0.698 at 40 MB.",
+        ru: "0,786 измерено на случайных рейсах тех дат, которые модель уже видела. На июне — декабре качество падает до 0,63: отчасти модель запоминает плохие дни. Больше данных почти не помогло (0,659 на 73 скрытых днях). Почасовая погода в обоих аэропортах подняла его до 0,699; облегчённая версия в демо даёт 0,698 при 40 МБ.",
+        uz: "0,786 model allaqachon ko‘rgan sanalardagi tasodifiy reyslarda o‘lchangan. Iyun — dekabrda sifat 0,63 gacha tushadi: model qisman yomon kunlarni yodlab oladi. Ko‘proq ma’lumot deyarli yordam bermadi (73 ta yashirin kunda 0,659). Ikkala aeroportdagi soatlik ob-havo uni 0,699 gacha ko‘tardi; demodagi yengil versiya 40 MB da 0,698 beradi.",
       },
     },
   ],
@@ -212,6 +228,20 @@ export const flightdelay: CaseContent = {
         result: { en: "AUC 0.779, 114 MB", ru: "AUC 0,779, 114 МБ", uz: "AUC 0,779, 114 MB" },
         decision: { en: "Configuration E in the demo", ru: "Конфигурация E в демо", uz: "Demoda E konfiguratsiyasi" },
       },
+      {
+        when: { en: "November", ru: "Ноябрь", uz: "Noyabr" },
+        what: {
+          en: "Whole 2015 with and without weather, checked on 73 hidden days",
+          ru: "Весь 2015 год с погодой и без, проверка на 73 скрытых днях",
+          uz: "Butun 2015-yil ob-havo bilan va usiz, 73 ta yashirin kunda tekshiruv",
+        },
+        result: { en: "AUC 0.659 → 0.699", ru: "AUC 0,659 → 0,699", uz: "AUC 0,659 → 0,699" },
+        decision: {
+          en: "Light version (0.698, 40 MB) is the demo default",
+          ru: "Облегчённая версия (0,698, 40 МБ) по умолчанию в демо",
+          uz: "Yengil versiya (0,698, 40 MB) demoda sukut bo‘yicha",
+        },
+      },
     ],
     note: {
       en: "Alongside these runs I tuned the CatBoost hyperparameters and tried other seed values, checking the metrics each time. The diploma report notes that Lossguide trees overfitted on 2 million rows and more, while symmetric trees generalised better. I did not keep the logs of those runs, so there are no exact figures for them here.",
@@ -231,17 +261,17 @@ export const flightdelay: CaseContent = {
     {
       tech: "scikit-learn Pipeline",
       why: {
-        en: "The first step is my own FlightFeatureEngineer transformer, the second is CatBoost. Traffic statistics are computed in fit, on the training split only, which closes off leakage from the test set. The whole pipeline is saved as one file, so the app builds features with the same code as training and the two cannot drift apart. Switching to the compact model means swapping that file.",
-        ru: "Первый шаг это мой трансформер FlightFeatureEngineer, второй это CatBoost. Статистика загрузки считается в fit только на обучающей части, что закрывает утечку из тестовой. Весь конвейер сохраняется одним файлом, поэтому приложение строит признаки тем же кодом, что и обучение, и разойтись с ним не может. Перейти на компактную модель значит заменить этот файл.",
-        uz: "Birinchi qadam mening FlightFeatureEngineer transformerim, ikkinchisi CatBoost. Yuklama statistikasi fit ichida faqat o‘quv qismida hisoblanadi, bu test qismidan sizib chiqishni yopadi. Butun konveyer bitta faylda saqlanadi, shuning uchun ilova belgilarni o‘qitishdagi kod bilan quradi va undan farq qila olmaydi. Ixcham modelga o‘tish shu faylni almashtirishdir.",
+        en: "The first step is my own FlightFeatureEngineer transformer, the second is CatBoost. Traffic statistics are computed in fit, on the training split only, which closes off leakage from the test set. The whole pipeline is saved as one file, so the app builds features with the same code as training and the two cannot drift apart. Each model in the demo is one such file.",
+        ru: "Первый шаг это мой трансформер FlightFeatureEngineer, второй это CatBoost. Статистика загрузки считается в fit только на обучающей части, что закрывает утечку из тестовой. Весь конвейер сохраняется одним файлом, поэтому приложение строит признаки тем же кодом, что и обучение, и разойтись с ним не может. Каждая модель в демо это один такой файл.",
+        uz: "Birinchi qadam mening FlightFeatureEngineer transformerim, ikkinchisi CatBoost. Yuklama statistikasi fit ichida faqat o‘quv qismida hisoblanadi, bu test qismidan sizib chiqishni yopadi. Butun konveyer bitta faylda saqlanadi, shuning uchun ilova belgilarni o‘qitishdagi kod bilan quradi va undan farq qila olmaydi. Demodagi har bir model shunday bitta fayl.",
       },
     },
     {
       tech: "Streamlit, Hugging Face Hub",
       why: {
-        en: "A free public demo, with the model stored apart from the code.",
-        ru: "Бесплатное публичное демо, а модель хранится отдельно от кода.",
-        uz: "Bepul ochiq demo, model esa koddan alohida saqlanadi.",
+        en: "A free public demo, with the models stored apart from the code. A model is loaded the first time someone picks it and then stays in memory for every visitor, so only the first switch waits a few seconds; both demo models together take about 0.85 GB.",
+        ru: "Бесплатное публичное демо, а модели хранятся отдельно от кода. Модель загружается, когда её впервые выбирают, и дальше остаётся в памяти для всех посетителей, поэтому несколько секунд ждёт только первое переключение; обе модели демо вместе занимают около 0,85 ГБ.",
+        uz: "Bepul ochiq demo, modellar esa koddan alohida saqlanadi. Model birinchi marta tanlanganda yuklanadi va keyin barcha tashrif buyuruvchilar uchun xotirada qoladi, shuning uchun faqat birinchi almashtirish bir necha soniya kutadi; ikkala demo modeli birga taxminan 0,85 GB egallaydi.",
       },
     },
   ],
@@ -249,7 +279,20 @@ export const flightdelay: CaseContent = {
     {
       label: { en: "ROC-AUC, full model", ru: "ROC-AUC, полная модель", uz: "ROC-AUC, to‘liq model" },
       value: "0.786",
-      note: { en: "Compact model in the demo: 0.779.", ru: "Компактная модель в демо: 0,779.", uz: "Demodagi ixcham model: 0,779." },
+      note: {
+        en: "Random flights from dates the model had seen. Compact model in the demo: 0.779.",
+        ru: "Случайные рейсы тех дат, которые модель видела. Компактная модель в демо: 0,779.",
+        uz: "Model ko‘rgan sanalardagi tasodifiy reyslar. Demodagi ixcham model: 0,779.",
+      },
+    },
+    {
+      label: { en: "ROC-AUC on unseen days, weather model", ru: "ROC-AUC на невиданных днях, модель с погодой", uz: "Ko‘rilmagan kunlarda ROC-AUC, ob-havo modeli" },
+      value: "0.698",
+      note: {
+        en: "73 whole days left out of training, 1.1 million flights. The diploma models score 0.63–0.64 on new dates.",
+        ru: "73 целых дня, исключённых из обучения, 1,1 млн рейсов. Дипломные модели на новых датах дают 0,63–0,64.",
+        uz: "O‘qitishdan chiqarilgan 73 ta butun kun, 1,1 mln reys. Diplom modellari yangi sanalarda 0,63–0,64 beradi.",
+      },
     },
     {
       label: { en: "All flights used", ru: "Всего рейсов в работе", uz: "Ishlatilgan barcha reyslar" },
@@ -294,8 +337,8 @@ export const flightdelay: CaseContent = {
     },
   ],
   metricsSource: {
-    en: "Model figures are from reports/metrics in the repository, flight counts and delay shares are counted from the source flights.csv. The threshold table is for the full model.",
-    ru: "Показатели модели из reports/metrics в репозитории, число рейсов и доли задержек посчитаны по исходному flights.csv. Таблица порогов относится к полной модели.",
-    uz: "Model ko‘rsatkichlari repozitoriydagi reports/metrics dan, reyslar soni va kechikish ulushlari asl flights.csv bo‘yicha hisoblangan. Chegaralar jadvali to‘liq modelga tegishli.",
+    en: "Model figures are from reports/metrics in the repository (the weather model: weather_model_results.txt), flight counts and delay shares are counted from the source flights.csv. The threshold table is for the full model.",
+    ru: "Показатели модели из reports/metrics в репозитории (модель с погодой: weather_model_results.txt), число рейсов и доли задержек посчитаны по исходному flights.csv. Таблица порогов относится к полной модели.",
+    uz: "Model ko‘rsatkichlari repozitoriydagi reports/metrics dan (ob-havo modeli: weather_model_results.txt), reyslar soni va kechikish ulushlari asl flights.csv bo‘yicha hisoblangan. Chegaralar jadvali to‘liq modelga tegishli.",
   },
 };
