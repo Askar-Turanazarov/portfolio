@@ -22,8 +22,8 @@ const csp = [
   ["base-uri", "'self'"],
   ["form-action", "'self'"],
   ["frame-ancestors", "'none'"],
+  // report-uri only: with report-to present Chromium switches to the batched Reporting API, which may never deliver
   ["report-uri", "/api/csp-report"],
-  ["report-to", "csp"],
 ]
   .map((d) => d.join(" "))
   .join("; ");
@@ -38,10 +38,7 @@ const securityHeaders = [
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), interest-cohort=()" },
   ...(process.env.NODE_ENV === "production"
-    ? [
-        { key: "Content-Security-Policy-Report-Only", value: csp },
-        { key: "Reporting-Endpoints", value: 'csp="/api/csp-report"' },
-      ]
+    ? [{ key: "Content-Security-Policy-Report-Only", value: csp }]
     : []),
 ];
 

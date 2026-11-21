@@ -1,7 +1,7 @@
 /**
  * Receives Content Security Policy violation reports and writes a short line per violation to the runtime log.
- * Two formats arrive: `application/csp-report` ({"csp-report": {...}}, Safari and Firefox through report-uri)
- * and `application/reports+json` ([{type: "csp-violation", body: {...}}], Chromium through report-to).
+ * Two formats are accepted: `application/csp-report` ({"csp-report": {...}}, what report-uri sends in every browser)
+ * and `application/reports+json` ([{type: "csp-violation", body: {...}}], the Reporting API, in case report-to returns).
  * Only the directive, the blocked origin and the page path are kept: no query strings, no user agent.
  */
 
