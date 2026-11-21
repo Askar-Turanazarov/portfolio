@@ -1,5 +1,8 @@
 import { z } from "zod";
 
+// Zod probes `Function("")` to compile fast parsers; the site's CSP has no 'unsafe-eval', so skip the probe.
+z.config({ jitless: true });
+
 /** Filter tags shown in the project grid. Labels live in the dictionaries. */
 export const tags = [
   "ai",
