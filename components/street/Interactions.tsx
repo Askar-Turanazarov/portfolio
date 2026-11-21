@@ -67,6 +67,8 @@ export function Interactions() {
       if (th) setColumn(th.dataset.mod ?? null);
     };
     const out = (e: Event) => {
+      // a finger leaves right after it lifts: the tapped row keeps its recipe until the next tap
+      if ((e as PointerEvent).pointerType === "touch") return;
       const t = e.target as HTMLElement;
       const related = (e as PointerEvent).relatedTarget as HTMLElement | null;
       const slugEl = t.closest<HTMLElement>("[data-street-slug]");

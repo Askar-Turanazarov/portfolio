@@ -242,6 +242,7 @@ const uz: Dictionary = {
     index: {
       title: "Yig‘ma",
       lede: "Barcha mahsulotlar o‘nta moduldan yig‘ilgan. Modul qayerda turganini ko‘rish uchun unga kursorni olib boring; loyihaning retseptini yig‘ish uchun loyihaga olib boring.",
+      ledeTouch: "Barcha mahsulotlar o‘nta moduldan yig‘ilgan. Loyihaga bosing, yuqoridagi modullar uning retseptiga saflanadi.",
       all: "O‘nta modul",
       project: "Loyiha",
       when: "Qachon",

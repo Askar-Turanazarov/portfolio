@@ -242,6 +242,7 @@ const en = {
     index: {
       title: "Assembly",
       lede: "All the products are assembled from ten modules. Hover a module to see where it stands; hover a project to assemble its recipe.",
+      ledeTouch: "All the products are assembled from ten modules. Tap a project and the modules above line up into its recipe.",
       all: "Ten modules",
       project: "Project",
       when: "When",

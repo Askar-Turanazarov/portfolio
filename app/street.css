@@ -893,6 +893,17 @@ html:has(.street) body {
   margin: 0 0 10px;
   font: 400 40px/1.1 var(--serif);
 }
+.street .index .lede2 .on-touch {
+  display: none;
+}
+@media (hover: none), (pointer: coarse) {
+  .street .index .lede2 .on-hover {
+    display: none;
+  }
+  .street .index .lede2 .on-touch {
+    display: inline;
+  }
+}
 .street .index .lede2 {
   margin: 0 0 30px;
   max-width: 62ch;
@@ -1183,8 +1194,11 @@ html:has(.street) body {
   .street .mast nav .hide-sm {
     display: none;
   }
+  /* scene and text stand one above the other: the hero grows with the text instead of cutting it off */
   .street .hero {
+    height: auto;
     min-height: 0;
+    max-height: none;
     grid-template-rows: auto auto;
   }
   .street .scene-wrap {
@@ -1226,9 +1240,11 @@ html:has(.street) body {
   .street .spreads {
     --fade: 80px;
   }
+  /* the shot stands right above its text: drifting, it would ride over the caption and the title */
   .street .spread {
     padding-block: 44px;
     row-gap: 18px;
+    --near: 0px;
   }
   .street .spread figure,
   .street .spread .txt {

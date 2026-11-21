@@ -17,7 +17,11 @@ export function Assembly({ dict, locale, rows }: { dict: Dictionary; locale: Loc
     <section className="g index" id="index" aria-labelledby="h-index">
       <div className="in">
         <h2 id="h-index">{t.title}</h2>
-        <p className="lede2">{t.lede}</p>
+        {/* a finger cannot hover: touch screens get the same hint in words for a tap */}
+        <p className="lede2">
+          <span className="on-hover">{t.lede}</span>
+          <span className="on-touch">{t.ledeTouch}</span>
+        </p>
         <div className="recipe" id="recipe" aria-live="polite" data-all={t.all}>
           <span className="who">{t.all}</span>
           {modules.map((m) => (
