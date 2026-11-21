@@ -29,8 +29,9 @@ const csp = [
   .join("; ");
 
 /**
- * The policy runs in report-only mode first: browsers block nothing and send what they would have blocked to
- * /api/csp-report (Vercel runtime logs). Once the logs stay clean, the header becomes Content-Security-Policy.
+ * Enforced after a clean report-only run (desktop and phone sweep, a real iPhone). Browsers block what the policy
+ * does not allow and still post each block to /api/csp-report, so a new library that needs more shows up in the
+ * Vercel runtime logs.
  */
 const securityHeaders = [
   { key: "X-Content-Type-Options", value: "nosniff" },
@@ -38,7 +39,7 @@ const securityHeaders = [
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), interest-cohort=()" },
   ...(process.env.NODE_ENV === "production"
-    ? [{ key: "Content-Security-Policy-Report-Only", value: csp }]
+    ? [{ key: "Content-Security-Policy", value: csp }]
     : []),
 ];
 
