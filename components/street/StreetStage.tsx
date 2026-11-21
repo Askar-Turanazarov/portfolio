@@ -25,8 +25,8 @@ const isDark = () => document.documentElement.classList.contains("dark");
 /**
  * The street on the hero. Server-rendered as two posters (day / evening, the LCP element); on
  * capable devices the scene is imported lazily once the hero is near the viewport and fades in
- * over the poster. Phones, reduced motion, save-data and missing WebGL keep the poster, and there the navigator
- * opens the cards without a camera.
+ * over the poster. Reduced motion, save-data and missing WebGL keep the poster, and there the navigator opens the
+ * cards without a camera; so does a phone whose WebGL context is taken back.
  */
 export function StreetStage({ cards, nav, posterDay, posterEvening, stageLabel, caption, captionScene }: Props) {
   const stage = useRef<HTMLDivElement>(null);
@@ -169,8 +169,7 @@ export function StreetStage({ cards, nav, posterDay, posterEvening, stageLabel, 
 
     const q = new URLSearchParams(location.search);
     const reduce = matchMedia("(prefers-reduced-motion: reduce)");
-    const coarse = matchMedia("(pointer: coarse)").matches;
-    const narrow = matchMedia("(max-width: 767px)").matches;
+    const phone = matchMedia("(pointer: coarse) and (max-width: 1023px)").matches;
     const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData === true;
     const webgl = (() => {
       try {
@@ -180,7 +179,7 @@ export function StreetStage({ cards, nav, posterDay, posterEvening, stageLabel, 
         return false;
       }
     })();
-    const poster = (q.has("poster") || reduce.matches || coarse || narrow || saveData || !webgl) && !q.has("scene");
+    const poster = (q.has("poster") || reduce.matches || saveData || !webgl) && !q.has("scene");
     const setMode = (m: "poster" | "scene") => {
       hero.dataset.mode = m;
       root.dataset.mode = m;
@@ -232,6 +231,12 @@ export function StreetStage({ cards, nav, posterDay, posterEvening, stageLabel, 
       onDepart() {
         setOpen(null);
         keep.remember();
+      },
+      onLost() {
+        live.current = false;
+        setScene(null);
+        delete el.dataset.state;
+        setMode("poster");
       },
       onArrive(slug, pt) {
         const i = cards.findIndex((c) => c.slug === slug);
@@ -292,12 +297,14 @@ export function StreetStage({ cards, nav, posterDay, posterEvening, stageLabel, 
           govern: q.get("gov") !== "0",
           hfov,
           eye,
+          phone,
           texturePath: "/street/tex/",
           onHover: (...a) => keep.handlers?.onHover(...a),
           onQuality: (...a) => keep.handlers?.onQuality(...a),
           onCurrent: (...a) => keep.handlers?.onCurrent(...a),
           onDepart: () => keep.handlers?.onDepart(),
           onArrive: (...a) => keep.handlers?.onArrive(...a),
+          onLost: () => keep.lost(),
         });
         // a reload lands where the visitor stood; the measurement scripts place the camera themselves
         const was = debug ? null : keep.recall();

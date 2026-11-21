@@ -6,6 +6,7 @@ export type SceneHandlers = {
   onCurrent: NonNullable<SceneOptions["onCurrent"]>;
   onDepart: () => void;
   onArrive: NonNullable<SceneOptions["onArrive"]>;
+  onLost: () => void;
 };
 
 /** How long a parked scene holds the video memory before it is let go. */
@@ -36,6 +37,23 @@ export const keep = {
       this.sc = this.host = null;
       this.returning = false;
     }, PARK_MS);
+  },
+
+  /** The context is gone (a phone took the memory back): drop the scene, the page shows its poster. */
+  lost() {
+    const sc = this.sc;
+    if (!sc) return;
+    this.handlers?.onLost();
+    clearTimeout(this.timer);
+    this.sc = null;
+    this.returning = false;
+    this.host?.remove();
+    this.host = null;
+    try {
+      sc.dispose();
+    } catch {
+      /* a dead context may refuse */
+    }
   },
 
   /** Survives a full reload of the tab. */

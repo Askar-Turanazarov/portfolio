@@ -23,6 +23,8 @@ export type SceneOptions = {
   onDepart?: ((slug: string, building: SceneBuilding) => void) | null;
   /** A travel has ended; the point is where the building's sign stands on screen. */
   onArrive?: ((slug: string, point: LabelPoint, building: SceneBuilding) => void) | null;
+  /** The scene is gone: the WebGL context was lost, or a phone could not keep up even on the lowest level. */
+  onLost?: (() => void) | null;
   /** The governor changed the quality level. */
   onQuality?: ((level: Quality, gpu: GpuInfo) => void) | null;
   /** Mount the diagnostic overlay (renderer, level, frame times, draw calls). */
@@ -33,6 +35,8 @@ export type SceneOptions = {
   hfov?: number;
   /** Eye height in metres (default 3). */
   eye?: number;
+  /** A phone: a higher pixel-ratio cap for its small, dense canvas. */
+  phone?: boolean;
 };
 
 export type SceneStats = {
